@@ -3,12 +3,15 @@
 What is Cougar?
 ===============
 
+Elevator Pitch
+--------------
+
 Cougar is an open source framework for implementing well defined service interfaces with true transport independence, freeing you up to write your core logic. Originally written by Betfair, and powering their core services, it is a high performance framework, easily supporting high concurrency requirements.
 
 Oh, you wanted more detail than the front page? Well, in that case read on, after all, it's always a little more complex than that..
 
 Core Cougar
-===========
+-----------
 
 At it's core, Cougar provides an execution venue within which executables can be run. Executables are asynchronous in nature, proving results (be those responses or faults) via a callback mechanism. In it's simplist form, an execution venue consists of a queue of outstanding execution requests, and a pool of threads which pull work from that queue.
 
@@ -24,7 +27,7 @@ Cougar supports 3 core paradigms of interaction:
 * Connected Objects - replicant objects that can be mutated on a server and the state of which will be replicated to one or more clients.
 
 Transports
-==========
+----------
 
 Layered over the top of this core, Cougar provides a set of transports for interacting with the outside world. You can extend this set of transports with your own as required, and we expect to expand this set over time:
 * HTTP transport - runs on an embedded Jetty server. Supports RPC in a number of styles:
@@ -38,11 +41,11 @@ Layered over the top of this core, Cougar provides a set of transports for inter
 All these transports support varying security levels, all the way from none to 2-way SSL for non-repudiated client identification.
 
 Cougar Client
-=============
+-------------
 
 *TODO*
 
 Extras
-======
+------
 
 e.g. JMX console, codegen plugin
