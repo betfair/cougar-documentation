@@ -31,9 +31,9 @@ Transports
 
 Layered over the top of this core, Cougar provides a set of transports for interacting with the outside world. You can extend this set of transports with your own as required, and we expect to expand this set over time:
 * HTTP transport - runs on an embedded Jetty server. Supports RPC in a number of styles:
-** JSON-RPC
-** XML/JSON over HTTP (affectionally called Rescript)
-** SOAP (yes, we hate it too, but some people can't escape it)
+ * JSON-RPC
+ * XML/JSON over HTTP (affectionally called Rescript)
+ * SOAP (yes, we hate it too, but some people can't escape it)
 * Socket transport - a custom binary transport which multiplexes requests over a TCP connection. This supports both RPC and connected objects.
 * JMS transport - an abstract base transport for supporting JMS implementations. Supports events.
 * ActiveMQ transport - a concrete event transport.
