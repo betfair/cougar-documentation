@@ -20,6 +20,7 @@ Executables are often simple wrapper classes which map to method calls on a serv
 Execution requests are accompanied by the arguments passed in and some contextual information about the call which provides access to (amongst other things):
 * Caller identity
 * Remote address(es) and geolocation
+* Transport security information
 
 Cougar supports 3 core paradigms of interaction:
 * RPC - your bog standard call an operation and get a response back.
@@ -48,4 +49,4 @@ Cougar Client
 Extras
 ------
 
-e.g. JMX console, codegen plugin
+e.g. JMX console, codegen plugin, tornjak integration, config niceties
