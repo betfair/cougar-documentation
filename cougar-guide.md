@@ -35,7 +35,7 @@ Layered over the top of this core, Cougar provides a set of transports for inter
  * JSON-RPC
  * XML/JSON over HTTP (affectionally called Rescript)
  * SOAP (yes, we hate it too, but some people can't escape it)
-* Socket transport - a custom binary transport which multiplexes requests over a TCP connection. This supports both RPC and connected objects.
+* Socket transport - implementing a custom binary protocol which multiplexes requests over a TCP connection. This supports both RPC and connected objects.
 * JMS transport - an abstract base transport for supporting JMS implementations. Supports events.
 * ActiveMQ transport - a concrete event transport.
 
@@ -44,9 +44,9 @@ All these transports support varying security levels, all the way from none to 2
 Cougar Client
 -------------
 
-*TODO*
+Obviously at some point you're going to want to call other Cougar based service interfaces, and Cougar provides a client framework to do so. Supporting JSON over HTTP (RPC) and our custom binary protocol (RPC & Connected Objects), Cougar clients are generated stubs from the target's interface definition document.
 
 Extras
 ------
 
-e.g. JMX console, codegen plugin, tornjak integration, config niceties
+e.g. JMX console, codegen plugin, tornjak integration, config niceties, sync adapters
