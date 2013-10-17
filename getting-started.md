@@ -7,6 +7,9 @@ This guide is intended as a 5 minute guide to getting a service up and running w
 
 Basic project structure
 -----------------------
+```
+mvn archetype:generate -DarchetypeRepository= -DarchetypeGroupId= -DarchetypeArtifactId= -DarchetypeVersion=
+```
 
 Your first service interface
 ----------------------------
