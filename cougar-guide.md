@@ -44,9 +44,15 @@ All these transports support varying security levels, all the way from none to 2
 Cougar Client
 -------------
 
-Obviously at some point you're going to want to call other Cougar based service interfaces, and Cougar provides a client framework to do so. Supporting JSON over HTTP (RPC) and our custom binary protocol (RPC & Connected Objects), Cougar clients are generated stubs from the target's interface definition document.
+Obviously at some point you're going to want to call other Cougar based service interfaces, and Cougar provides a client framework to do so. Supporting JSON over HTTP (RPC), our custom binary protocol (RPC & Connected Objects) and ActiveMQ or any other JMS provider (enabling subscription to other interfaces' events), Cougar clients are generated stubs from the target's interface definition document, which you can then bind to the transport of choice.
 
-Extras
-------
+Other bits
+----------
 
-e.g. JMX console, codegen plugin, tornjak integration, config niceties, sync adapters
+Alongside the main features above there are a bunch of other handy extras:
+* An admin console (exposed on a seperate port), providing a JMX console, remote thread dumping capability and an SPI to enable you to add additional capabilities.
+* Our code generator, mentioned above, is provided as a Maven plugin.
+* Component health exposure is provided by a dedicated Health service interface which you may deploy alongside your own service interfaces in the same JVM. It gathers sub-component statuses via the [Tornjak](http://betfair.github.io/tornjak) framework, and exposes them in a form that can be read from a load balancer or from monitoring tooling. 
+* The Tornjak integration also provides the capability to record performance metrics which are exposed in a manner sympathetic for capture into [OpenTSDB](http://opentsdb.net).
+* Whilst the core of Cougar is asynchronous, it does provide synchronous wrappers and adapter for both service implementors and client consumers, reducing maintenance complexity when the power of async is not required.
+* Configuration simplicity in the form of a strict 4 level hierarchy, ensuring that only those items of configuration which vary by deployment environment (e.g. dev vs production) need to be changed. Cougar also supports encrypted configuration items by integration with [Jasypt](http://www.jasypt.org).
