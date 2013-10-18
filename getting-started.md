@@ -5,6 +5,8 @@ Getting started with Cougar
 
 This guide is intended as a 5 minute guide to getting a service up and running with Cougar. Cougar has a rich set of features which we couldn't hope to cover in such a manner, so for other guides and references, please check out our [documentation hub](documentation.html).
 
+We're going to create an initial Cougar based project, define and implement an operation on a service interface, run it and call it.
+
 Basic project structure
 -----------------------
 
@@ -29,7 +31,7 @@ Generate your stubs
 
 Simply building your project will generate the required stubs. Compilation will fail in the application module since the new operation hasn't been implemented yet:
 ```
-mvn clean install
+mvn install
 ```
 
 Code your implementation
@@ -49,7 +51,7 @@ Running your service
 
 Before we can run your new service we need to build it:
 ```
-mvn clean install
+mvn install
 ```
 
 And now to launch:
