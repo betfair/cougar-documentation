@@ -25,4 +25,6 @@ References
 * [Utilities](utilities.html)
 * [Archetypes](archetypes.html)
 
+Older
+-----
 * [Legacy doco](legacy/index.html) - Old style Cougar documentation.
