@@ -6,6 +6,7 @@ Guides
 * [What is Cougar?](cougar-guide.html)
 * [Cougar in under 5 minutes](getting-started.html)
 * [Securing Cougar](securing.html)
+* [Tips 'N' Tricks](tips-tricks.html)
 
 References
 ----------
@@ -21,5 +22,5 @@ References
 * [Configuration](configuration.html)
 * [Async/sync](async-vs-sync.html)
 * [Modules](modules.html)
-* [Utilities](utilities)
-* [Tips 'N' Tricks](tips-tricks.html)
+* [Utilities](utilities.html)
+* [Archetypes](archetypes.html)
