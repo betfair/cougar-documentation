@@ -19,5 +19,7 @@ References
 * [Maven code generation plugin](codegen.html)
 * [Monitoring (health & performance)](monitoring.html)
 * [Configuration](configuration.html)
-* [Async/sync](async-and-sync.html)
+* [Async/sync](async-vs-sync.html)
 * [Modules](modules.html)
+* [Utilities](utilities)
+* [Tips 'N' Tricks](tips-tricks.html)
