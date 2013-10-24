@@ -24,6 +24,7 @@ References
 * [Modules](modules.html)
 * [Utilities](utilities.html)
 * [Archetypes](archetypes.html)
+* [Tuning](tuning.html)
 
 Older
 -----
