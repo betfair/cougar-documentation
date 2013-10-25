@@ -3,6 +3,7 @@ Cougar documentation hub
 
 Guides
 ------
+
 * [What is Cougar?](cougar-guide.html)
 * [Cougar in under 5 minutes](getting-started.html)
 * [Securing Cougar](securing.html)
@@ -10,6 +11,7 @@ Guides
 
 References
 ----------
+
 * [Jetty transport](jetty-transport.html)
 * [Binary transport](binary-transport.html)
 * [JMS transports](jms-transports.html)
@@ -28,4 +30,5 @@ References
 
 Older
 -----
+
 * [Legacy doco](legacy/index.html) - Old style Cougar documentation.

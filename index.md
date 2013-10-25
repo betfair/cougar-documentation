@@ -12,6 +12,7 @@ Using Cougar
 ------------
 
 If you're new to Cougar we suggest checking out the following 2 guides:
+
 * [What is Cougar?](cougar-guide.html)
 * [Cougar in under 5 minutes](getting-started.html)
 

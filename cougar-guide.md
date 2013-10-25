@@ -18,11 +18,13 @@ At it's core, Cougar provides an execution venue within which executables can be
 Executables are often simple wrapper classes which map to method calls on a service interface, which is generated from an interface definition, written in Cougar's very own IDL (it looks rather like Thrift but in XML), the implementation of which is written by you (or your developers if you have some at your beck and call).
 
 Execution requests are accompanied by the arguments passed in and some contextual information about the call which provides access to (amongst other things):
+
 * Caller identity
 * Remote address(es) and geolocation
 * Transport security information
 
 Cougar supports 3 core paradigms of interaction:
+
 * RPC - your bog standard call an operation and get a response back.
 * Events - emission/consumption of events (typically to a JMS system - although not restricted to such).
 * Connected Objects - replicant objects that can be mutated on a server and the state of which will be replicated to one or more clients.
@@ -31,6 +33,7 @@ Transports
 ----------
 
 Layered over the top of this core, Cougar provides a set of transports for interacting with the outside world. You can extend this set of transports with your own as required, and we expect to expand this set over time:
+
 * HTTP transport - runs on an embedded Jetty server. Supports RPC in a number of styles:
  * JSON-RPC
  * XML/JSON over HTTP (affectionally called Rescript)
@@ -50,6 +53,7 @@ Other bits
 ----------
 
 Alongside the main features above there are a bunch of other handy extras:
+
 * An admin console (exposed on a seperate port), providing a JMX console, remote thread dumping capability and an SPI to enable you to add additional capabilities.
 * Our code generator, mentioned above, is provided as a Maven plugin.
 * Component health exposure is provided by a dedicated Health service interface which you may deploy alongside your own service interfaces in the same JVM. It gathers sub-component statuses via the [Tornjak](http://betfair.github.io/tornjak) framework, and exposes them in a form that can be read from a load balancer or from monitoring tooling. 
