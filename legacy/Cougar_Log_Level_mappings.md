@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Cougar Log Level mappings
 

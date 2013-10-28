@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Implementing a Cougar Service Interface in Java
 {:toc}

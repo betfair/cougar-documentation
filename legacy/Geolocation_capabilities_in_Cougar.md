@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 
 A key core feature of Cougar is the resolution of information passed in the request (such as IP address) into location

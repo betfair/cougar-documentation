@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 What is Cougar?
 ===============

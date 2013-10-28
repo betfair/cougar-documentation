@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 To invoke Cougar services using ```curl``` you need a very good understanding of how RESCRIPT works, and your efforts
 may take considerable time and effort.  If time and effort are factors, avoid using this method, even for testing.

@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Implementing push in your service
 

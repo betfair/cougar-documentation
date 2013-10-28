@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Co-locating multiple services within your Application
 

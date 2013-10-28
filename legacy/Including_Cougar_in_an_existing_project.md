@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Including Cougar in an existing project
 

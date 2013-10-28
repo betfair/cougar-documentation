@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 Advanced Topic in Cougar
 ========================

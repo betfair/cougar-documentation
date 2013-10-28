@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 Anatomy of a Cougar Application
 ===============================

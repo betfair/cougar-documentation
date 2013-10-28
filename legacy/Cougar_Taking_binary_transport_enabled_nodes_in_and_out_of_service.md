@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Taking binary transport enabled nodes in and out of service
 

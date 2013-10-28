@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Consuming push in your client
 

@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Enumeration Handling in Cougar
 

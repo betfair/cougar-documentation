@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Troubleshooting in Cougar
 

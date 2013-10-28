@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Threading, Sync, Async and Timeouts
 

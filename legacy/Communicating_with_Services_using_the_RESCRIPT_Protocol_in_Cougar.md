@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 
 Note that if you're using Java, you're likely to want to use the [```curl``` and the baseline service](Cougar_Baseline_Service_RESCRIPT_curls.html)

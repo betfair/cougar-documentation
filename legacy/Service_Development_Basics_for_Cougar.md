@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 Service Development Basics for Cougar
 =====================================

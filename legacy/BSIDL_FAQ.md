@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # Does BSIDL Support&nbsp;Inheritance?
 
 **Q: I was hoping to have a type say “Shape” with some attributes and extend that type with some sub types say “Triangle” etc ?**

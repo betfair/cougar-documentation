@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # JSON-RPC in Cougar
 

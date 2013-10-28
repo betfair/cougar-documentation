@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 
 * Create a folder in the src/main/resources folder of your application project called ```static-html```

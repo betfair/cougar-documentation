@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 A ```com.betfair.cougar.core.api.fault.Fault``` happens under the following conditions:
 

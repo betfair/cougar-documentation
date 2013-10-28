@@ -1,2 +1,5 @@
+---
+layout: default
+---
 Binary transport
 ================

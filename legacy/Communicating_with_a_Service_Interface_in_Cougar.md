@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 
 How you interact with a service depends on your use case. 

@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # SSL in Cougar
 

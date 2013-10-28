@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # Cougar Binary Interface Shutdown Sequence
 
