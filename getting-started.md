@@ -11,10 +11,11 @@ Basic project structure
 -----------------------
 
 Creating the basic project structure and config can be a little tedious, so we're going to use the cougar archetype to generate the basic layout:
-```
-mvn archetype:generate -DarchetypeRepository= -DarchetypeGroupId= -DarchetypeArtifactId= -DarchetypeVersion=
 
 ```
+mvn archetype:generate -DarchetypeRepository= -DarchetypeGroupId= -DarchetypeArtifactId= -DarchetypeVersion=
+```
+
 Enter the values shown when prompted.
 
 Your first service interface
