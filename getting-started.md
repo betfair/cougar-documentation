@@ -14,10 +14,39 @@ Basic project structure
 Creating the basic project structure and config can be a little tedious, so we're going to use the cougar archetype to generate the basic layout:
 
 ```
-mvn archetype:generate -DarchetypeRepository= -DarchetypeGroupId= -DarchetypeArtifactId= -DarchetypeVersion=
+C:\>mvn archetype:generate -DarchetypeGroupId=com.betfair.cougar.archetypes -DarchetypeRepository=https://oss.sonatype.org/content/repositories/snapshots  -DarchetypeArtifactId=simple-service-archetype -DarchetypeVersion=3.0-SNAPSHOT
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] >>> maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom >>>
+[INFO]
+[INFO] <<< maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom <<<
+[INFO]
+[INFO] --- maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom ---
+[INFO] Generating project in Interactive mode
+[INFO] Archetype repository missing. Using the one from [com.betfair.cougar.archetypes:simple-service-archetype:3.0-SNAPSHOT] found in catalog local
+Define value for property 'groupId': : wibble
+Define value for property 'artifactId': : wibble
+Define value for property 'version':  1.0-SNAPSHOT: :
+Define value for property 'package':  wibble: :
+Confirm properties configuration:
+groupId: wibble
+artifactId: wibble
+version: 1.0-SNAPSHOT
+package: wibble
+ Y: : Y
 ```
 
 Enter the values shown when prompted.
+
+Finally, we need to run a little maven magic to get all the files with the right names/content:
+```
+C:\>cd wibble
+C:\wibble>mvn -Prename -Dupper=Wibble -Dlower=wibble install -N
+```
 
 Your first service interface
 ----------------------------
@@ -33,7 +62,7 @@ Generate your stubs
 
 Simply building your project will generate the required stubs. Compilation will fail in the application module since the new operation hasn't been implemented yet:
 ```
-mvn install
+C:\wibble>mvn install
 ```
 
 Code your implementation
