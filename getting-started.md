@@ -11,7 +11,7 @@ We're going to create an initial Cougar based project, define and implement an o
 Basic project structure
 -----------------------
 
-Creating the basic project structure and config can be a little tedious, so we're going to use the cougar archetype to generate the basic layout:
+Creating the basic project structure and config can be a little tedious, so we're going to use on of the provided cougar archetypes to generate the basic layout:
 
 ```
 C:\>mvn archetype:generate -DarchetypeGroupId=com.betfair.cougar.archetypes -DarchetypeRepository=https://oss.sonatype.org/content/repositories/snapshots  -DarchetypeArtifactId=simple-service-archetype -DarchetypeVersion=3.0-SNAPSHOT
