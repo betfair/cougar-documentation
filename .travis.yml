@@ -1,0 +1,7 @@
+language: java
+install: "echo 'No install command here!'"
+script: "./publish.sh"
+env:
+ global:
+   - "PUBLISH_USERNAME=eswdd"
+   - "PUBLISH_PASSWORD=rubbish"
