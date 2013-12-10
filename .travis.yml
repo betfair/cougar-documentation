@@ -1,6 +1,12 @@
 language: java
 install: "echo 'No install command here!'"
 script: "./publish-doco.sh"
+notifications:
+  email:
+    recipients:
+      - betfair-cougar-dev@googlegroups.com
+    on_success: always
+    on_failure: always
 env:
  global:
    - "PUBLISH_USERNAME=eswdd"
