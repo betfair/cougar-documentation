@@ -1,6 +1,6 @@
 language: java
 install: "echo 'No install command here!'"
-script: "./publish.sh"
+script: "./publish-doco.sh"
 env:
  global:
    - "PUBLISH_USERNAME=eswdd"
