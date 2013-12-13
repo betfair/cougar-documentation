@@ -46,6 +46,7 @@ mvn site:site site:deploy -Dsite.deploy.dir=$TMP_DIR/$PAGES_DIR/maven
 cd ..
 
 echo "Copying maven site into place"
+find doco-source -type d -name ".git" -exec rm -rf {} \;
 cp -R doco-source/* $PAGES_DIR
 
 echo "Telling git about our changes"
