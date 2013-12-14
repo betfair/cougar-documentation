@@ -10,5 +10,5 @@ notifications:
 env:
  global:
    - "GITHUB_USER=eswdd"
-   - "GITHUB_PASSWORD=rubbish"
-#   - secure: "BH0rO+bPeah1N2xwhIolyWV9pOH7xhm2RP3RFPrkMX9Hj23KlWKIbafHhplk/CSRA1q/JLT0DaYQ0r4hdTFV61xaqHMUgEx/hXwLP58q3m4nVgSU5IgN5ekIyCABlOe8VM2e5SbTlCzTtxMt18VvTPMIwEtRmwrD70nWfIhTreA="
+#   - "GITHUB_PASSWORD=rubbish"
+   - secure: "BH0rO+bPeah1N2xwhIolyWV9pOH7xhm2RP3RFPrkMX9Hj23KlWKIbafHhplk/CSRA1q/JLT0DaYQ0r4hdTFV61xaqHMUgEx/hXwLP58q3m4nVgSU5IgN5ekIyCABlOe8VM2e5SbTlCzTtxMt18VvTPMIwEtRmwrD70nWfIhTreA="
