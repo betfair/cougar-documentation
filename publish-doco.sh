@@ -2,4 +2,6 @@
 
 #git clone https://github.com/betfair/gh-pages-publishing.git
 #cd gh-pages-publishing
-bash -x ./publish.sh cougar $TRAVIS_BRANCH
+
+# NOTE: Never run this -x otherwise it will expose our github password, which is bad!
+./publish.sh cougar $TRAVIS_BRANCH
