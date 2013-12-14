@@ -11,4 +11,4 @@ env:
  global:
    - "GITHUB_USER=eswdd"
 #   - "GITHUB_PASSWORD=rubbish"
-   - secure: "og6X1CDQ323xXUXWmOUp2TBaoZC4rkL0dnGVOW89mfbYBJCfwLuw1XjT+EO9v20I8Hu7yGQuYWtOHECY89/ZkkXu4/vvmx/+38HygSEJZ2hVMOo6ZZNV0gvideIjy0esfYfq/XfMHHw6BUR+3q02g0z0aHh+nE3T6npd3nUmX+k="
+   - secure: "gr/2VX6NwBXMlMD8FiSsuJfHixC7jE6SiQLKAg4DTr2CzBKmmBGS28azZV2AAdZ9vvhZVuwr2m5+aoS8XVdOcxYfGcX7Ya67T26irDp7s6d13TnUBbJgv82zVEb0NobOjQxdgFlhy8/QBq1DF8kzjJM9f6gO0szKbkihlU0TycM="
