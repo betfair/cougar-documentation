@@ -63,11 +63,11 @@ fi
 echo "Generating maven site"
 mkdir -p $PAGES_DIR/maven
 cd source
-mvn site:site site:deploy -Dsite.deploy.dir=$TMP_DIR/$PAGES_DIR/maven
+#mvn site:site site:deploy -Dsite.deploy.dir=$TMP_DIR/$PAGES_DIR/maven
 cd ..
 
 echo "Copying maven site into place"
-find doco-source -type d -name ".git" -exec rm -rf {} \;
+rm -rf doco-source/.git
 cp -R doco-source/* $PAGES_DIR
 
 echo "Telling git about our changes"
@@ -81,8 +81,11 @@ cd ..
 
 echo "Pushing to live"
 cd gh-pages
+# todo: move these to env variables
+git config user.email "simon@exemel.co.uk"
+git config user.name "Simon Matic Langford"
 git commit -a -m "Pushing latest site updates"
-git push origin gh-pages
+git push https://$USER_PASS@github.com/$REPO.git gh-pages
 cd ..
 
 echo "Cleanup.."
