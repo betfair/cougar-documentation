@@ -1,6 +1,6 @@
 language: java
 install: "chmod u+x publish-doco.sh"
-script: "./publish-doco.sh"
+script: "bash ./publish-doco.sh"
 notifications:
   email:
     recipients:
