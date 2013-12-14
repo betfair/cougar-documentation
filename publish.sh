@@ -6,10 +6,22 @@ cd $TMP_DIR
 
 REPO=$1
 VERSION=$2
-USER=$3
+USER=$GITHUB_USER
+PASS=$GITHUB_PASSWORD
+
+if [ -z $USER && ! -z "$3" ]; then
+  USER=$3
+fi
+if [ -z $PASS && ! -z "$4" ]; then
+  PASS=$4
+fi
 
 if [ -z "$USER" ]; then
-  echo "Usage: publish.sh <repo> <version> <gh-user>"
+  echo "Usage: publish.sh <repo> <version> [<gh-user> [gh-password]]"
+  echo "       Username/password may also be passed by setting environment variables:"
+  echo "       GITHUB_USER"
+  echo "       GITHUB_PASSWORD"
+  echo "       If no password set then will try to use private key"
   exit 1
 fi
 
@@ -17,9 +29,14 @@ echo "Repository: $REPO"
 echo "Version: $VERSION"
 
 echo "Cloning git repos"
-git clone -b gh-pages https://$USER@github.com/$REPO.git gh-pages
-git clone -b $VERSION https://$USER@github.com/$REPO.git source
-git clone -b $VERSION https://$USER@github.com/$REPO-documentation.git doco-source
+USER_PASS=$USER
+if [ ! -z $PASS ]; then
+  USER_PASS=$USER_PASS:$PASS
+fi
+
+git clone -b gh-pages https://$USER_PASS@github.com/$REPO.git gh-pages
+git clone -b $VERSION https://$USER_PASS@github.com/$REPO.git source
+git clone -b $VERSION https://$USER_PASS@github.com/$REPO-documentation.git doco-source
 
 if [ $VERSION == "master" ]; then
   echo "Need to parse pom.xml"
