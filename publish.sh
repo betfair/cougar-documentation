@@ -9,11 +9,15 @@ VERSION=$2
 USER=$GITHUB_USER
 PASS=$GITHUB_PASSWORD
 
-if [ -z $USER && ! -z "$3" ]; then
-  USER=$3
+if [ -z $USER]; then
+  if [ ! -z "$3" ]; then
+    USER=$3
+  fi
 fi
-if [ -z $PASS && ! -z "$4" ]; then
-  PASS=$4
+if [ -z $PASS ]; then
+  if [ ! -z "$4" ]; then
+    PASS=$4
+  fi
 fi
 
 if [ -z "$USER" ]; then
