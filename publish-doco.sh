@@ -5,4 +5,4 @@
 
 # NOTE: Never run this -x otherwise it will expose our github password, which is bad!
 chmod u+x publish.sh
-./publish.sh cougar $TRAVIS_BRANCH
+./publish.sh betfair/cougar $TRAVIS_BRANCH
