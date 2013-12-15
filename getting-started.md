@@ -61,26 +61,26 @@ Service interfaces are described in an XML document called an IDD (Interface Def
 Open up ```wibble\wibble-idd\src\main\resources\WibbleService.xml``` and add the following xml snippet at line 34, just after the ```&lt;/operation>``` tag:
 
 ```
-    <operation name="echo">
+<operation name="echo">
+  <description/>
+  <parameters>
+    <request>
+      <parameter name="message" mandatory="true" type="string">
         <description/>
-        <parameters>
-            <request>
-                <parameter name="message" mandatory="true" type="string">
-                    <description/>
-                    <extensions>
-                        <style>request</style>
-                    </extensions>
-                </parameter>
-            </request>
-            <response type="string">
-                <description/>
-            </response>
-        </parameters>
         <extensions>
-            <path>/echo</path>
-            <method>GET</method>
+          <style>request</style>
         </extensions>
-    </operation>
+      </parameter>
+    </request>
+    <response type="string">
+      <description/>
+    </response>
+  </parameters>
+  <extensions>
+    <path>/echo</path>
+    <method>GET</method>
+  </extensions>
+</operation>
 ```
 
 This defines an operation called ```echo``` which will be exposed as an operation that can be called via a GET request when invoked via HTTP using Cougar's own Rescript protocol. It defines a single parameter called ```message``` which is mandatory and is a string, and when invoked via Rescript will be passed as a request parameter. It also declares that the returned type will be a string.
