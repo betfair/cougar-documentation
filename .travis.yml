@@ -11,7 +11,9 @@ env:
  global:
    # GITHUB_USER
    - secure: "qAxcWKsRIbljHCeebA7F93ZBu1LeMBINX56Wn6tEhKpckkXl2qrzKYyND1wu38q3aljTMwK3YpaYU78fxzzP+zFl26gSAhCWLhOEXwTxkRyb5ghV7jtjTq1TJNA7jjEz7AQAIjQw2zI6xFIQmqJBSTmziKy5owwes/IrT82Z9tA="
-   - "GIT_NAME=Simon Matic Langford"
-   - "GIT_EMAIL=simon@exemel.co.uk"
    # GITHUB_PASSWORD
    - secure: "fxJcSZ38RHN8JX+RQ5juS4Q+5HfuPHJAHE32H0+wfAd+EuO8f8e3+7paFfB9pV6JeHTuQWbpz4YBif3Ofw/JthoFn2WEBDktXjvEH3RKD1MOq16SXRjh/sZ75N6CDWDZzoqZ7WBdERbJiVHCB8jPZwka/bxH6pbUK+VbB5FQCjE="
+   # GIT_NAME
+   - secure: "OJIz6nwoPnNBPme8mKcf/ZroeMPiUoh254E4P02o+l8CnSWhGfq5M340uSiGFmSX01/a5Y4Y7xFV9Hcw1DguhpAaH/daNtFnhbq8+oVEwAvTyxZ1BL5zzVgQ1AX6CVxIFPLPqlpzsOOoyXlAnAv4G3E9YJo301BzjgkL/8Ovswg="
+   # GIT_EMAIL
+   - secure: "eoKzr3ZfHvyT7vms0x3jamN/lbnWUuDqq1q6W14BGVM2sbQqMiSuSqz+F27gvnI852zeUHg/nvkyF6K75U+YwaFKozYxa1ZrHFOHWv6G/WKhFdhhTx3ELQA/qJGF8F3W6i3d/hFp67G/DzIsytl0uZ/PCofylad5B6hiFG/vB4g="
