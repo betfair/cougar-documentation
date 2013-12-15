@@ -12,4 +12,4 @@ env:
    - "GITHUB_USER=eswdd"
    - "GIT_NAME=Simon Matic Langford"
    - "GIT_EMAIL=simon@exemel.co.uk"
-   - secure: "gr/2VX6NwBXMlMD8FiSsuJfHixC7jE6SiQLKAg4DTr2CzBKmmBGS28azZV2AAdZ9vvhZVuwr2m5+aoS8XVdOcxYfGcX7Ya67T26irDp7s6d13TnUBbJgv82zVEb0NobOjQxdgFlhy8/QBq1DF8kzjJM9f6gO0szKbkihlU0TycM="
+   - secure: "fxJcSZ38RHN8JX+RQ5juS4Q+5HfuPHJAHE32H0+wfAd+EuO8f8e3+7paFfB9pV6JeHTuQWbpz4YBif3Ofw/JthoFn2WEBDktXjvEH3RKD1MOq16SXRjh/sZ75N6CDWDZzoqZ7WBdERbJiVHCB8jPZwka/bxH6pbUK+VbB5FQCjE="
