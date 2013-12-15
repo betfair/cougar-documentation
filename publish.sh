@@ -70,6 +70,7 @@ fi
 echo "Generating maven site"
 mkdir -p $PAGES_DIR/maven
 cd source
+mvn install -DskipTests=true
 mvn site:site site:deploy -Dsite.deploy.dir=$TMP_DIR/$PAGES_DIR/maven
 cd ..
 
