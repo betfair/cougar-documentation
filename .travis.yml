@@ -1,5 +1,6 @@
 language: ruby
 install: 
+  - "bundle install"
   - "chmod u+x publish-doco.sh"
 script: "./publish-doco.sh"
 notifications:
