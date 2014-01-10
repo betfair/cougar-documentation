@@ -1,5 +1,6 @@
-language: java
-install: "chmod u+x publish-doco.sh"
+language: ruby
+install: 
+  - "chmod u+x publish-doco.sh"
 script: "./publish-doco.sh"
 notifications:
   email:
@@ -17,4 +18,3 @@ env:
    - secure: "OJIz6nwoPnNBPme8mKcf/ZroeMPiUoh254E4P02o+l8CnSWhGfq5M340uSiGFmSX01/a5Y4Y7xFV9Hcw1DguhpAaH/daNtFnhbq8+oVEwAvTyxZ1BL5zzVgQ1AX6CVxIFPLPqlpzsOOoyXlAnAv4G3E9YJo301BzjgkL/8Ovswg="
    # GIT_EMAIL
    - secure: "eoKzr3ZfHvyT7vms0x3jamN/lbnWUuDqq1q6W14BGVM2sbQqMiSuSqz+F27gvnI852zeUHg/nvkyF6K75U+YwaFKozYxa1ZrHFOHWv6G/WKhFdhhTx3ELQA/qJGF8F3W6i3d/hFp67G/DzIsytl0uZ/PCofylad5B6hiFG/vB4g="
-#
