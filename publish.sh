@@ -52,6 +52,10 @@ git clone -b $VERSION https://$USER_PASS@github.com/$REPO-documentation.git doco
 
 cd $TMP_DIR/doco-source-test
 bundle exec jekyll build --config _config.yml
+RESULT=$?
+if [ $RESULT -ne 0 ]; then
+  exit 1
+fi
 cd $TMP_DIR
 rm -rf doco-source-test
 
