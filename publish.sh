@@ -51,7 +51,7 @@ git clone -b $VERSION https://$USER_PASS@github.com/$REPO.git source-test
 git clone -b $VERSION https://$USER_PASS@github.com/$REPO-documentation.git doco-source
 
 cd $TMP_DIR/source-test
-bundle exec jekyll build
+bundle exec jekyll build --config _config.yml
 cd $TMP_DIR
 
 if [ $VERSION == "master" ]; then
