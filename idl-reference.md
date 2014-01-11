@@ -65,7 +65,6 @@ Interface.xml:
         &lt;/value>
       &lt;/validValues>
     &lt;/simpleType>
-    
   &lt;/interface>
 </code>
 
