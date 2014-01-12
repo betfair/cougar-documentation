@@ -89,7 +89,11 @@ Interface-Extensions.xml:
       &lt;/extensions>
     &lt;/operation>
     &lt;event>
-      ...
+      &lt;parameter>
+        &lt;extensions>
+          &lt;style/>
+        &lt;/extensions>
+      &lt;/parameter>
     &lt;/event>
   	&lt;extensions>
   		&lt;path/>
