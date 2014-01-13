@@ -10,8 +10,9 @@ Similar to maven pom reference
 
 Interface.xml:
 
+<pre>
 <code>
-  &lt;interface><br/>
+  &lt;<a href=''>interface</a>><br/>
     &lt;description/><br/>
     &lt;operation><br/>
       &lt;description/><br/>
@@ -68,6 +69,7 @@ Interface.xml:
     &lt;/simpleType><br/>
   &lt;/interface>
 </code>
+</pre>
 
 Interface-Extensions.xml:
 
