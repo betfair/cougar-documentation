@@ -14,7 +14,7 @@ Interface.xml:
 <code>
   &lt;<a href='#interface'>interface</a>>
     &lt;description/>
-    &lt;[operation](#operation)>
+    &lt;<a href='#operation'>operation</a>>
       &lt;description/>
       &lt;parameters>
         &lt;request>
