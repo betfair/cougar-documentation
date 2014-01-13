@@ -105,8 +105,7 @@ Interface-Extensions.xml:
 </code>
 </pre>
 
-<a name="interface"></a>
-Interface
+interface
 ---------
 
 
