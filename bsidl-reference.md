@@ -89,7 +89,7 @@ Main IDD (Interface.xml):
         &lt;/validValues>
       &lt;/parameter>
     &lt;/event>
-    &lt;<a href='#eventType'>eventType</a>>
+    &lt;<a href='#exceptionType'>exceptionType</a>>
       &lt;description/>
       &lt;parameter>
         &lt;description/>
