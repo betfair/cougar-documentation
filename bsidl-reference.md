@@ -89,6 +89,17 @@ Main IDD (Interface.xml):
         &lt;/validValues>
       &lt;/parameter>
     &lt;/event>
+    &lt;<a href='#eventType'>eventType</a>>
+      &lt;description/>
+      &lt;parameter>
+        &lt;description/>
+        &lt;validValues>
+          &lt;value>
+            &lt;description/>
+          &lt;/value>
+        &lt;/validValues>
+      &lt;/parameter>
+    &lt;/dataType>
     &lt;<a href='#dataType'>dataType</a>>
       &lt;description/>
       &lt;parameter>
