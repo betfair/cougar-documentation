@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-# IDL Reference
+# BSIDL Reference
 
 ## Overview
 
@@ -146,36 +146,40 @@ IDD Extensions (Interface-Extensions.xml):
 </code>
 </pre>
 
-### interface
+### &lt;interface>
 
 <a name="interface-extensions"></a>
-#### extensions
+#### Supported extensions
 
 
-### operation
+### &lt;operation>
 
 <a name="operation-extensions"></a>
-#### extensions
+#### Supported extensions
 
 
-### parameter
+### &lt;parameter>
 
 <a name="parameter-extensions"></a>
-#### extensions
+#### Supported extensions
 
 
-### response
+### &lt;response>
 
 
-### exception
+### &lt;exception>
 
 
-### event
+### &lt;event>
 
 
-### dataType
+### &lt;exceptionType>
 
-### simpleType
+
+### &lt;dataType>
+
+
+### &lt;simpleType>
 
 
 
