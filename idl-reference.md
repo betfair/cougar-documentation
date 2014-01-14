@@ -3,7 +3,7 @@ layout: default
 ---
 # IDL Reference
 
-==&lt;Interface&gt;.xml==:
+```&lt;Interface&gt;.xml```:
 
 <pre>
 <code>
@@ -66,7 +66,7 @@ layout: default
 </code>
 </pre>
 
-==&lt;Interface-Extensions&gt;.xml==:
+```&lt;Interface-Extensions&gt;.xml```:
 
 <pre>
 <code>
