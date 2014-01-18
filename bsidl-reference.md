@@ -175,10 +175,10 @@ The ```interface``` element describes the top-level attributes of service interf
 ```
 
 The attributes are explained in more detail:
- * _name_: The name of the service, this should match exactly with the file name without file extension (e.g. filename: FooBar.xml corresponds to name: FooBar)
- * _owner_: The person who should be contacted with any queries regarding this service interface, in many cases one of the authors but this isn't necessary
- * _version_: The version of the interface - please see [versioning](TODO)
- * _date_: The date that the interface version was frozen - in development service interface can use the now() function that will insert the current date time - the date should be formatted as an [[ISO 8601 date|http://en.wikipedia.org/wiki/ISO_8601]] in UTC
+ * _name_: The name of the service, this should match exactly with the file name without file extension (e.g. filename: FooBar.xml corresponds to name: FooBar).
+ * _owner_: The person who should be contacted with any queries regarding this service interface, in many cases one of the authors but this isn't necessary.
+ * _version_: The version of the interface - please see [versioning](versioning.html).
+ * _date_: The date that the interface version was frozen - in development service interface can use the now() function that will insert the current date time - the date should be formatted as an [[ISO 8601 date|http://en.wikipedia.org/wiki/ISO_8601]] in UTC.
 
 The ```description``` element provides a description of the interface (usually in English).
 
