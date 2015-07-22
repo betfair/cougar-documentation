@@ -42,7 +42,7 @@ Notes
 -----
 
 * [Interface versioning](versioning.html) - TODO
-* [SOAP - why we don't like it](whats-wrong-with-soap.html) - TODO
+* [SOAP - why we don't like it](whats-wrong-with-soap.html)
 
 Older
 -----
