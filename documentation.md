@@ -20,7 +20,7 @@ Guides
 References
 ----------
 
-* [Cougar IDL](bsidl-reference.html) - TODO
+* [Cougar IDL](bsidl-reference.html) - In Progress
 * [Transport basics](transport-basics.html)
  * [Jetty transport](jetty-transport.html) - TODO
  * [Binary transport](binary-transport.html) - TODO
