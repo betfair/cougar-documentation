@@ -1,3 +1,5 @@
 *.iml
 *.ipr
 .idea
+Gemfile.lock
+_site
