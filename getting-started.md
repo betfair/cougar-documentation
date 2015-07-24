@@ -47,7 +47,7 @@ archetypes to generate the basic layout:
 
 Enter the values shown when prompted.
 
-Now a little pom hackery is required to remove the vestiges of our archetype project, open up the ```pom.xml``` in the
+Now a little pom hackery is required to remove the vestiges of our archetype project, open up the `pom.xml` in the
 directory just created (`wibble`) and remove these lines from the top:
 
     <parent>
