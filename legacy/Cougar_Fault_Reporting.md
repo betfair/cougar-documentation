@@ -1,32 +1,32 @@
 ---
 layout: default
 ---
-A ```com.betfair.cougar.core.api.fault.Fault``` happens under the following conditions:
+A `com.betfair.cougar.core.api.fault.Fault` happens under the following conditions:
 
 * The request is badly formed in some way (invalid encoding, mandatory data missing, etc)
 * The Cougar framework had an unexpected problem (a Java runtime exception).
-* The application code returned a defined exception (One of the exceptions listed in the ```<exceptions>``` tag of the operation).
+* The application code returned a defined exception (One of the exceptions listed in the `<exceptions>` tag of the operation).
 * The application code had an unexpected problem (a Java runtime exception).
 
 It contains:
 
-* A ```FaultCode``` indicating whether the problem is at the client or on the server
-* An ```errorCode``` in the form XXX-YYYY, where XXX indicates in which functional area the error occurred, and YYYY is a number signifying the cause
-* A ```FaultDetail``` containing a message and possibly a trace, if detailed fault reporting is enabled
+* A `FaultCode` indicating whether the problem is at the client or on the server
+* An `errorCode` in the form XXX-YYYY, where XXX indicates in which functional area the error occurred, and YYYY is a number signifying the cause
+* A `FaultDetail` containing a message and possibly a trace, if detailed fault reporting is enabled
 
 # Enabling Detailed Fault Reporting
 
-You can do this statically by setting the Cougar core property ```cougar.fault.detailed=true```, or dynamically using the MBean ```CoUGAR:name=faultController```.
+You can do this statically by setting the Cougar core property `cougar.fault.detailed=true`, or dynamically using the MBean `CoUGAR:name=faultController`.
 
 # Cougar errorCodes
 
-```DSC``` is the ```errorCode``` prefix for faults returned by Cougar itself.
+`DSC` is the `errorCode` prefix for faults returned by Cougar itself.
 
 
 <table style='background-color: #FFFFCE;'>
          <tr>
            <td valign='top'><img src='warning.gif' width='16' height='16' align='absmiddle' alt='' border='0'></td>
-           <td><p>If you can't find what you need in this table, please look at the source of ```ServerFaultCode``` in your IDE and then update this page.</p></td>
+           <td><p>If you can't find what you need in this table, please look at the source of `ServerFaultCode` in your IDE and then update this page.</p></td>
           </tr>
 </table>
 
@@ -274,9 +274,9 @@ You can do this statically by setting the Cougar core property ```cougar.fault.d
 
 # Service errorCodes
 
-These are defined in the service BSIDLs, for example here we see that ```WEX-0001``` indicates "The wotsit is closed".
+These are defined in the service BSIDLs, for example here we see that `WEX-0001` indicates "The wotsit is closed".
 
-```
+`
 <interface name="Baseline" ...
     ...
     <exceptionType name="WotsitException" prefix="WEX">
@@ -288,7 +288,7 @@ These are defined in the service BSIDLs, for example here we see that ```WEX-000
 	            <description>The wotsit is closed</description>
 	        </value>
                 ...
-```
+`
 
 # Example faults
 
@@ -296,7 +296,7 @@ These are defined in the service BSIDLs, for example here we see that ```WEX-000
 
 A SOAP fault for a malformed request with detailed fault reporting switched on:
 
-```
+`
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
    <soap:Header/>
    <soap:Body>
@@ -311,11 +311,11 @@ A SOAP fault for a malformed request with detailed fault reporting switched on:
       </soap:Fault>
    </soap:Body>
 </soap:Envelope>
-```
+`
 
 A SOAP fault for a Null pointer exception being thrown in the application code with detailed fault reporting switched off:
 
-```
+`
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.betfair.com/security/">
    <soap:Header/>
    <soap:Body>
@@ -326,11 +326,11 @@ A SOAP fault for a Null pointer exception being thrown in the application code w
       </soap:Fault>
    </soap:Body>
 </soap:Envelope>
-```
+`
 
 A SOAP fault for a defined exception (WotsitException) with 2 parameters (errorCode & type) being thrown and detailed fault reporting switched on
 
-```
+`
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://www.betfair.com/security/">
    <soap:Header/>
    <soap:Body>
@@ -369,13 +369,13 @@ A SOAP fault for a defined exception (WotsitException) with 2 parameters (errorC
       </soap:Fault>
    </soap:Body>
 </soap:Envelope>
-```
+`
 
 ## HTTP Transport, RESCRIPT Protocol, XML Content Type
 
 A fault for an internal problem in the cougar code with detailed fault reporting switched on:
 
-```
+`
 <fault>
    <faultcode>Server</faultcode>
    <faultstring>DSC-0002</faultstring>
@@ -384,13 +384,13 @@ A fault for an internal problem in the cougar code with detailed fault reporting
       <message>Unhandled event found in serialiser</message>
    </detail>
 </fault>
-```
+`
 
 ## HTTP Transport, RESCRIPT Protocol, JSON Content Type
 
 An IDL defined exception (SimpleException with fields errorCode and reason) thrown by the application code:
 
-```
+`
 {
    "detail":    {
       "message": "SimpleException",
@@ -403,4 +403,4 @@ An IDL defined exception (SimpleException with fields errorCode and reason) thro
    "faultcode": "Client",
    "faultstring": "SEX-0001"
 }
-```
+`

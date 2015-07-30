@@ -50,7 +50,7 @@ Note that generics are specified with '()' rather than '<>' as chevrons break th
 
 #### Preamble
 
-```
+`
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <interface name="Test" owner="Joe Bloggs" version="0.1" date="01/01/1970">
 	<authors>
@@ -58,7 +58,7 @@ Note that generics are specified with '()' rather than '<>' as chevrons break th
 	</authors>
 	<description>This is here to provide an example of all features in order for tests to be made</description>
 </interface>
-```
+`
 
 This is essentially the header of the IDL containing information about the service. Below each significant XPath is explained
 
@@ -98,7 +98,7 @@ address  </td>
 
 #### Operations
 
-```xml
+`xml
 <operation name="someMethod" since="0.1.0">
 	<description>Retrieves an account</description>
 	<parameters>
@@ -115,7 +115,7 @@ address  </td>
 		<product name="SoftGames"/>
 	</consumers>
 </operation>
-```
+`
 
 <table>
 <tr>
@@ -169,7 +169,7 @@ have valid values assigned to them.
 Valid Values elements indicate the total set of available values which can be used for the named parameter, and which
 should ultimately be validated in the interface implementation. An example is shown below
 
-```xml
+`xml
 <parameter name="type" type="string">
 	<description>The type of balance</description>
 	<validValues>
@@ -181,7 +181,7 @@ should ultimately be validated in the interface implementation. An example is sh
 		</value>
 	</validValues>
 </parameter>
-```
+`
 
 So this is a string parameter called 'type' which can have the value AVAILABLE_TO_BET or AVAILABLE_TO_WITHDRAW
 
@@ -189,13 +189,13 @@ So this is a string parameter called 'type' which can have the value AVAILABLE_T
 
 These act as aliases for the base types supported by the IDL.
 
-```xml
+`xml
 <simpleType name="someType" type="i64"/>
-```
+`
 
 #### Data Types
 
-```xml
+`xml
 <dataType name="Example">
 	<description>This data type represents an example for a howto</description>
 	<parameter name="account" type="Account">
@@ -205,11 +205,11 @@ These act as aliases for the base types supported by the IDL.
 		<description>If the account is a master account</description>
 	</parameter>
 </dataType>
-```
+`
 
 #### Events
 
-```xml
+`xml
 <event name="SomeChange" since="1.1.0">
 	<description>Event indicating that a change has been made</description>
 	<parameter type="i64" name="accountId" mandatory="true">
@@ -219,11 +219,11 @@ These act as aliases for the base types supported by the IDL.
 		<description>The new value for this account</description>
 	</parameter>
 </event>
-```
+`
 
 #### Exceptions
 
-```xml
+`xml
 <exceptionType name="SomeException">
 	<description>This exception is thrown when Something bad happens</description>
 	<parameter name="errorCode" type="string">
@@ -234,7 +234,7 @@ These act as aliases for the base types supported by the IDL.
 		only and shouldn't be returned to users. There is also no need to localize this string.</description>
 	</parameter>
 </exceptionType>
-```
+`
 
 #### Enumerations
 
@@ -250,7 +250,7 @@ More info required (regexps + size restrictions).
 Several elements within the IDL support extension markup which is specific to each modeled protocol. Extension elements
 take the format of:
 
-```xml
+`xml
 <extensions>
 	<!-- Some Protocol name which supports extensions, which maps to the type generator name
              such as bfmq-java, or rest -->
@@ -258,4 +258,4 @@ take the format of:
 		<httpmethod>GET</httpmethod>
 	</rest>
 </extensions>
-```
+`

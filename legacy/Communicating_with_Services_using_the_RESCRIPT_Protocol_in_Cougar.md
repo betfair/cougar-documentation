@@ -2,12 +2,12 @@
 layout: default
 ---
 
-Note that if you're using Java, you're likely to want to use the [```curl``` and the baseline service](Cougar_Baseline_Service_RESCRIPT_curls.html)
+Note that if you're using Java, you're likely to want to use the [`curl` and the baseline service](Cougar_Baseline_Service_RESCRIPT_curls.html)
 rather than writing your own, which will be much faster.
 
 If you're dead set on writing your own Cougar client that uses the RESCRIPT protocol (and remember, this is not recommended),
 read this document to generally familiarize yourself with RESCRIPT, then do some hands-on experimentation with
-[```curl``` and the baseline service](Cougar_Baseline_Service_RESCRIPT_curls.html).
+[`curl` and the baseline service](Cougar_Baseline_Service_RESCRIPT_curls.html).
 
 ## Introduction
 
@@ -15,7 +15,7 @@ The simplest protocol supported by Cougar is RESCRIPT - a combination of REST an
 which an IDD is transformed into RESCRIPT.
 
 Snippets of IDD will be used throughout this document, but all will be based on the following interface:
-```XML
+`XML
 <interface name="DemoIDD" owner="Angus McSporran" version="1.1" date="now()" ... >
     ...
     <dataType name="MyDataType">
@@ -59,7 +59,7 @@ Snippets of IDD will be used throughout this document, but all will be based on 
         <path>/demo</path>
     </extensions>
 </interface>
-```
+`
 
 
 ## Controlling the response format
@@ -76,12 +76,12 @@ baseline service simple get, call [http://localhost:8080/baseline/v1.0/simple/fo
 ## XML Namespace
 
 At build time, the IDD is transformed into a set of java classes and interfaces reflecting the IDD. At this stage the
-XML namespace is also defined. It is set to ```http://www.betfair.com/servicetypes/<MajorVersionNumber>/<ServiceName>/``` - so
+XML namespace is also defined. It is set to `http://www.betfair.com/servicetypes/<MajorVersionNumber>/<ServiceName>/` - so
 for the sample interface it would be:
 
-```
+`
 http://www.betfair.com/servicetypes/v1/DemoIDD
-```
+`
 
 This namespace is common to all request and response XML data.
 
@@ -112,7 +112,7 @@ XML or JSON format.
 All parameters to an operation that are to be passed in the body are encapsulated within a request tag, whose name will
 correspond to the name of the operation. Taking the following IDD:
 
-```xml
+`xml
 <operation name="bodyOperation" since="1.0.0">
     ...
     <parameters>
@@ -137,7 +137,7 @@ correspond to the name of the operation. Taking the following IDD:
         <method>POST</method>
     </extensions>
 </operation>
-```
+`
 
 It can be seen that the the body must contain both the firstBodyParam and the secondBodyParam.
 
@@ -145,7 +145,7 @@ It can be seen that the the body must contain both the firstBodyParam and the se
 
 The form of the XML request is:
 
-```xml
+`xml
 <BodyOperationRequest xmlns="http://www.betfair.com/servicetypes/v1/DemoIDD/">
     <firstBodyParam>value one</firstBodyParam>
     <secondBodyParam>
@@ -158,13 +158,13 @@ The form of the XML request is:
         </myNestedDataType>
     </secondBodyParam>
 </BodyOperationRequest>
-```
+`
 
 #### JSON request
 
 The form of the JSON request is:
 
-```javascript
+`javascript
 {
     "firstBodyParam":"value one"
     "secondBodyParam":{
@@ -177,14 +177,14 @@ The form of the JSON request is:
         "myEnum":"FOO"
     },
 }
-```
+`
 
 ## Responses
 
 The response of an operation may be any single data type, which will always be wrapped in a response tag whose name will
 correspond to the name of the operation. Taking the following IDD:
 
-```xml
+`xml
 <operation name="responseOperation" since="1.0.0">
     ...
     <parameters>
@@ -200,13 +200,13 @@ correspond to the name of the operation. Taking the following IDD:
         <method>GET</method>
     </extensions>
 </operation>
-```
+`
 
 #### XML Response
 
 The form of the XML response is:
 
-```xml
+`xml
 <ResponseOperationResponse xmlns="http://www.betfair.com/servicetypes/v1/DemoIDD/">
     <MyDataType>
         <myInt>12345</myInt>
@@ -218,13 +218,13 @@ The form of the XML response is:
         </myNestedDataType>
     </MyDataType >
 </ResponseOperationResponse>
-```
+`
 
 #### JSON Response
 
 The form of the JSON response is:
 
-```javascript
+`javascript
 {
     "myNestedDataType":{
         "foo":"foo string",
@@ -234,7 +234,7 @@ The form of the JSON response is:
     "myString":"string value",
     "myEnum":"FOO"
 }
-```
+`
 
 ## Primitive Types
 
@@ -244,9 +244,9 @@ There are some issues with the display of primitive types in RESCRIPT, particula
 
 DateTimes are rendered as full ISO 8601 protocol. This format is simply defined as:
 
-```
+`
 [YYYY]-[MM]-[DD]T[hh]:[mm]:[ss].[mmm][Timezone]
-```
+`
 
 A more detailed explanation can be found at [Wikipedia](http://en.wikipedia.org/wiki/ISO_8601). It should be noted
 that shortened forms of ISO-8601 are not supported.
@@ -301,7 +301,7 @@ The IDL has the capability to return sets and lists of both primitives and defin
 over the wire in identical formats (as arrays) - the only difference is that at the Cougar end, sets are de-duped while
 lists are left as-is. Taking the following IDL :
 
-```
+`
 <dataType name="ListsAndSets">
     ...
     <parameter name="dates" type="list(dateTime)">
@@ -314,14 +314,14 @@ lists are left as-is. Taking the following IDL :
         ...
     </parameter>
 </dataType>
-```
+`
 
 #### XML Representation
 
 There is no native XML form for representing arrays, so RESCRIPT uses repeating tags to render the information. It can
  also be seen that each inner tag has no explicit name as defined in the IDL, so it maps to the class name.
 
-```
+`
 <ListsAndSets xmlns="http://www.betfair.com/servicetypes/v1/DemoIDD/">
   <dates>
     <Date>2009-07-05T18:54:55.876Z</Date>
@@ -342,13 +342,13 @@ There is no native XML form for representing arrays, so RESCRIPT uses repeating 
     <Integer>2627</Integer>
   </i32s>
 </ListsAndSets>
-```
+`
 
 #### JSON Representation
 
 JSON has the concept of an array, so all lists and sets are rendered using this construct:
 
-```
+`
 {
     "dates":[
         "2009-07-05T18:54:55.876Z",
@@ -369,14 +369,14 @@ JSON has the concept of an array, so all lists and sets are rendered using this 
          262.9
      ]
 }
-```
+`
 
 ## Maps
 
 The IDL has the capability to return maps of both primitives and defined dataTypes, although RESCRIPT imposes a restriction
 that the key of the map must be Stringable, and therefore natively comparable. Taking the following IDL :
 
-```
+`
 <dataType name="MapDataType">
     ...
     <parameter name="cache" type="map(i32,ComplexObject)" mandatory="true">
@@ -386,7 +386,7 @@ that the key of the map must be Stringable, and therefore natively comparable. T
         ...
     </parameter>
 </dataType>
-```
+`
 
 #### XML Representation
 
@@ -394,7 +394,7 @@ As for lists and sets, there is no native XML form for representing arrays, so R
 pairs. Again, similarly to the list implementation, it can also be seen that each inner tag has no explicit name as defined
 in the IDL, so it maps to the class name.
 
-```
+`
 <MapDataType xmlns="http://www.betfair.com/servicetypes/v1/DemoIDD/">
   <cache>
     <entry key="0">
@@ -419,13 +419,13 @@ in the IDL, so it maps to the class name.
     </entry>
   </someMap>
 </MapDataType>
-```
+`
 
 #### JSON Representation
 
 JSON is all about maps, so rendering a map is easy as pie:
 
-```
+`
 {
     "cache": {
         "0": {
@@ -442,7 +442,7 @@ JSON is all about maps, so rendering a map is easy as pie:
         "String-0":"1954-03-07T17:23:06.360Z"
     }
 }
-```
+`
 
 ## Direct returning of Abstract Data Types
 
@@ -453,7 +453,7 @@ There is a special case that should be mentioned explicitly. If an operation is 
 
 As described above, Lists and Sets are handled the same way by RESCRIPT. Responses are defined for the following IDD:
 
-```
+`
 <operation name="responseOperation" since="1.0.0">
     ...
     <parameters>
@@ -465,13 +465,13 @@ As described above, Lists and Sets are handled the same way by RESCRIPT. Respons
     </parameters>
     ...
 </operation>
-```
+`
 
 #### XML Array Response
 
 The form of the XML response is:
 
-```
+`
 <ResponseOperationResponse xmlns="http://www.betfair.com/servicetypes/v1/DemoIDD/">
     <MyDataType>
         <myInt>12345</myInt>
@@ -492,13 +492,13 @@ The form of the XML response is:
         </myNestedDataType>
     </MyDataType >
 </ResponseOperationResponse>
-```
+`
 
 #### JSON Array Response
 
 The form of the JSON response is:
 
-```
+`
 [
    {
       "myInt":12345,
@@ -519,13 +519,13 @@ The form of the JSON response is:
       }
    }
 ]
-```
+`
 
 ### Direct response for Maps
 
 Responses are defined for the following IDD:
 
-```
+`
 <operation name="responseOperation" since="1.0.0">
     ...
     <parameters>
@@ -537,13 +537,13 @@ Responses are defined for the following IDD:
     </parameters>
     ...
 </operation>
-```
+`
 
 #### XML Map Response
 
 The form of the XML response is:
 
-```
+`
 <ResponseOperationResponse xmlns="http://www.betfair.com/servicetypes/v1/DemoIDD/">
     <entry key="0">
         <MyDataType>
@@ -568,13 +568,13 @@ The form of the XML response is:
         </MyDataType >
     </entry>
 </ResponseOperationResponse>
-```
+`
 
 #### JSON Map Response
 
 The form of the JSON response is:
 
-```
+`
 {
    "0":{
       "myInt":12345,
@@ -595,59 +595,59 @@ The form of the JSON response is:
       }
    },
 }
-```
+`
 
 ## Faults
 
 Faults may occur in one of the following scenarios:
 * The request is badly formed in some way (invalid encoding, mandatory data missing, etc)
 * The Cougar framework had an unexpected problem (a java runtime exception).
-* The application code returned a defined exception (One of the exceptions listed in the ```<exceptions>``` tag of the operation).
+* The application code returned a defined exception (One of the exceptions listed in the `<exceptions>` tag of the operation).
 * The application code had an unexpected problem (a java runtime exception).
 
 When this happens, a fault response is returned. Fault responses are explained the [Cougar Fault Reporting](Cougar_Fault_Reporting.html) document.
 
 ## Manipulating the URIs your interface methods are available on
 
-By default Cougar will generate code that is annotated such that your service will be exposed on ```/<interfaceName>/<version>/<operationName>```.
+By default Cougar will generate code that is annotated such that your service will be exposed on `/<interfaceName>/<version>/<operationName>`.
 
 ### Changing the interface name
 
-You can change the ```<interfaceName```> part of the URI by changing the value of the ```/interface/extensions/path``` element in the RESCRIPT document.  For example:
+You can change the `<interfaceName`> part of the URI by changing the value of the `/interface/extensions/path` element in the RESCRIPT document.  For example:
 
-```
+`
 <interface name="Example" version="1.0.0">
     ...
     <extensions>
         <path>/eg</path>
     </extensions>
 </interface>
-```
+`
 
-In this case the path to some operation 'echo' would be ```/eg/<version>/echo``` instead of ```/Example/<version>/echo```.
+In this case the path to some operation 'echo' would be `/eg/<version>/echo` instead of `/Example/<version>/echo`.
 
-It's legal to leave the ```path``` empty, so the URI would end up as simply ```/<version>/<operationName>```.
+It's legal to leave the `path` empty, so the URI would end up as simply `/<version>/<operationName>`.
 
 ### Omitting the interface version
 
-You can choose to omit the ```<version>``` part of the URL by defining the attribute ```/interface/extensions/path``` in the RESCRIPT document.  For example:
+You can choose to omit the `<version>` part of the URL by defining the attribute `/interface/extensions/path` in the RESCRIPT document.  For example:
 
-```
+`
 <interface name="Example" version="1.0.0">
     ...
     <extensions>
         <path unversioned="true">/eg</path>
     </extensions>
 </interface>
-```
+`
 
-In this case the path to some operation 'doSomething' would be ```/eg/echo``` instead of ```/eg/<version>/echo```.
+In this case the path to some operation 'doSomething' would be `/eg/echo` instead of `/eg/<version>/echo`.
 
 ### Changing the operation name
 
-You can change the ```<operationName>``` part of the URI by changing the value of the ```/interface/operation/extensions/path``` element in the RESCRIPT document.  For example:
+You can change the `<operationName>` part of the URI by changing the value of the `/interface/operation/extensions/path` element in the RESCRIPT document.  For example:
 
-```
+`
 <interface name="Example" version="1.0.0">
     ...
     <operation name="echo">
@@ -656,6 +656,6 @@ You can change the ```<operationName>``` part of the URI by changing the value o
            <path>/ekko</path>
        </extensions>
        ...
-```
+`
 
-In this case the path to some operation 'doSomething' would be ```/Example/1.0/ekko``` instead of ```/Example/1.0/echo```
+In this case the path to some operation 'doSomething' would be `/Example/1.0/ekko` instead of `/Example/1.0/echo`

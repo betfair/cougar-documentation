@@ -21,7 +21,7 @@ your ServiceRegistration bean, will expose the service with the supplied prefix.
 
 Consider the following set of Protocol Bindings:
 
-```xml
+`xml
 <bean parent="cougar.transport.AbstractProtocolBinding">
   <property name="contextRoot" value=""/>
   <property name="identityTokenResolver" ref="SimpleRescriptIdentityTokenResolver"/>
@@ -34,11 +34,11 @@ Consider the following set of Protocol Bindings:
   </property>
   <property name="protocol" value="RESCRIPT"/>
 </bean>
-```
+`
 
 Against the following service definitions:
 
-```xml
+`xml
 <bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
     <property name="resolver">
         <bean class="com.betfair.baseline.v2.BaselineSyncServiceExecutableResolver">
@@ -71,16 +71,16 @@ Against the following service definitions:
         </util:set>
     </property>
 </bean>
-```
+`
 
 Will mean that each service will be exposed on both /www and / . So when you start Cougar up, you'll see the following endpoints:
 
-```
+`
 /www/cougarBaseline/v2
 /cougarBaseline/v2
 /www/anotherService/v1
 /anotherService/v1
-```
+`
 
 ### Running multiple versions of the same service simultaneously
 
@@ -88,7 +88,7 @@ Poses no particular problems, however you should be aware that only one major ve
 This is to ensure that a request originating from a 1.3 client can be serviced by a 1.5 implementation without needing a
 client upgrade.
 
-### Running both a client and service for the same Service definition. 
+### Running both a client and service for the same Service definition.
 
 Putting aside the question of why you'd need to do this (we need it specifically for building a distributed model that
 needs to be symmetric at both ends - ERO needs prices from Australia and vice versa), it leads to a cougar problem - specifically
@@ -100,7 +100,7 @@ disambiguate them.
 
 The following snippet shows the spring definition for defining and registering a namespaced client:
 
-```xml
+`xml
 <bean name="syncClient" class="com.betfair.baseline.v2.BaselineSyncClientAdapter">
     <property name="asynchronousClient">
         <bean class="com.betfair.baseline.v2.BaselineClientImpl" parent="cougar.client.AbstractClient">
@@ -129,6 +129,6 @@ The following snippet shows the spring definition for defining and registering a
     </property>
     <property name="namespace" value="CLI"/>
 </bean>
-```
+`
 
 Note that both the client bean and the registration of that service both need to specify (the same) namespace.

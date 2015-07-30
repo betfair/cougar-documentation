@@ -10,25 +10,25 @@ layout: default
 Internally, Cougar uses [Tornjak](http://github.com/betfair/tornjak), please see this [guide](http://betfair.github.io/tornjak/master/legacy/Monitor_Usage_Spring.html)
 for details of how to configure that framework, paying particular attention to the [active monitoring setup](http://betfair.github.io/tornjak/master/legacy/Active_Monitoring.html)
 if you plan to use the resulting status to drive a load balancer. To expose the status of your application to the Cougar
-data services container, you are required to expose an instance of the ```MonitorRegistry``` interface from your ```Service```.
-This should have been exemplified in the archetype you used as a basis for your service (look at your ```cougar-application-spring.xml```), you just need to tailor it to your needs.
+data services container, you are required to expose an instance of the `MonitorRegistry` interface from your `Service`.
+This should have been exemplified in the archetype you used as a basis for your service (look at your `cougar-application-spring.xml`), you just need to tailor it to your needs.
 
 ## Including the Cougar Health Service
 
 Your service's status information will then be available to you if you use the Cougar Health Service module (included by default in the archetype).
 
-```XML
+`XML
     <dependency>
         <groupId>com.betfair.cougar</groupId>
         <artifactId>cougar-health-service-app</artifactId>
         <version>${cougar.version}</version>
         <scope>runtime</scope>
     </dependency>
-```
+`
 
 ## Cougar Health Service URLs
 
-Port is usually 8080 unless over-ridden by ```jetty.http.port```.
+Port is usually 8080 unless over-ridden by `jetty.http.port`.
 
 <table>
 <tr>
@@ -57,32 +57,32 @@ Port is usually 8080 unless over-ridden by ```jetty.http.port```.
 
 # Cougar Container Monitoring Services
 
-The cougar data services container has a secondary HTTP port, independent of the deployed transport that allows remote monitoring of the cougar application. 
+The cougar data services container has a secondary HTTP port, independent of the deployed transport that allows remote monitoring of the cougar application.
 
 It has 4 distinct interfaces, available on different urls, although this number may increase or decrease depending on the modules installed.
 
-The port is usually 9999 unless over-ridden by ```jmx.html.port```.
+The port is usually 9999 unless over-ridden by `jmx.html.port`.
 
 
 <table style='background-color: #FFFFCE;'>
          <tr>
            <td valign='top'><img src='warning.gif' width='16' height='16' align='absmiddle' alt='' border='0'></td>
-           <td><p>The protocol for the services on port 9999 is usually HTTP when the application is run up in dev mode (e.g. via ```exec:java```), and HTTPS everywhere else.
+           <td><p>The protocol for the services on port 9999 is usually HTTP when the application is run up in dev mode (e.g. via `exec:java`), and HTTPS everywhere else.
            In this document HTTP is used, simply replace with HTTPS where necessary.</p></td>
           </tr>
 </table>
 
 
-The port is protected by HTTP basic auth.  The username is always ```jmxadmin```.  The default password (usually used in dev) is ```password```.
+The port is protected by HTTP basic auth.  The username is always `jmxadmin`.  The default password (usually used in dev) is `password`.
 
-The username and password are governed by the ```jmx.html.username``` and ```jmx.html.password``` properties.
+The username and password are governed by the `jmx.html.username` and `jmx.html.password` properties.
 
 ## SSL
 
 By default, Cougar runs this monitoring interface with SSL enabled. This is strongly recommended for production. Unfortunately,
 it's not possible for us to distribute certificates, so you need to specify 3 properties to setup SSL properly:
-```jmx.html.keystore.filepath```, ```jmx.html.keystore.password``` and ```jmx.html.keystore.certpassword```. If you want to
-disable SSL for use in a development environment, then use ```jmx.html.tls.enabled```, setting it to ```false```.
+`jmx.html.keystore.filepath`, `jmx.html.keystore.password` and `jmx.html.keystore.certpassword`. If you want to
+disable SSL for use in a development environment, then use `jmx.html.tls.enabled`, setting it to `false`.
 
 ## JMX HTML Bean Browser
 
@@ -101,8 +101,8 @@ https://localhost:9999/administration/threaddump.jsp (or http://localhost:9999/a
 ### Parameters
 
 This is an API (if we're going to be **really** generous) that allows beans and attributes to be returned in an easy-to-parse format,
-either individually or in batches. It is accessed at ```https://localhost:9999/administration/batchquery.jsp```
-(or ```http://localhost:9999/administration/batchquery.jsp``` if you have SSL disabled) and takes the following attributes:
+either individually or in batches. It is accessed at `https://localhost:9999/administration/batchquery.jsp`
+(or `http://localhost:9999/administration/batchquery.jsp` if you have SSL disabled) and takes the following attributes:
 
 * **on** The object name of the bean being interrogated.
  * This may be a [wildcard](http://download.oracle.com/javase/6/docs/api/javax/management/ObjectName.html) name matching multiple beans.
@@ -134,11 +134,11 @@ All these examples should work on the Baseline Service. Other deployed services 
 
 All the attributes of a bean are listed by not specifying an attribute ("an") parameter.
 
-* ```https://localhost:9002/administration/batchquery.jsp?on=java.lang%3Atype=Runtime```
+* `https://localhost:9002/administration/batchquery.jsp?on=java.lang%3Atype=Runtime`
 
 The skeleton of the return value is shown below. It has been formatted for ease of reading.
 
-```
+`
 java.lang:type=Runtime
     ~Name~2344@HARRISP
     ~ClassPath~...
@@ -147,38 +147,38 @@ java.lang:type=Runtime
     ~VmVersion~14.0-b16
     ~BootClassPathSupported~true
     ...
-```
+`
 
 #### Return the a single attribute of a bean and the current time
 
-* ```https://localhost:9999/administration/batchquery.jsp?on=java.lang%3Atype=Runtime&t&an=VmVersion```
+* `https://localhost:9999/administration/batchquery.jsp?on=java.lang%3Atype=Runtime&t&an=VmVersion`
 
 The formatted return value is shown below.
 
-```
+`
 Time~2009-10-29 14:51:28.932~
 java.lang:type=Runtime
     ~VmVersion~14.0-b16
-```
+`
 
 #### Return a System property
 
-* ```https://localhost:9999/administration/batchquery.jsp?on=SYSTEM&an=java.runtime.name```
+* `https://localhost:9999/administration/batchquery.jsp?on=SYSTEM&an=java.runtime.name`
 
 The skeleton formatted return value is shown below.
 
-```
+`
 System Properties
     ~java.runtime.name~Java(TM) SE Runtime Environment
-```
+`
 
 #### Return the same property from many beans
 
-* ```https://localhost:9999/administration/batchquery.jsp?on=CoUGAR.service.Baseline.v1.0:type=operation,name=**&an=Calls```
+* `https://localhost:9999/administration/batchquery.jsp?on=CoUGAR.service.Baseline.v1.0:type=operation,name=**&an=Calls`
 
 The formatted return value is shown below.
 
-```
+`
 CoUGAR.service.Baseline.v1.0:type=operation,name=testException
   ~Calls~67
 |
@@ -188,31 +188,31 @@ CoUGAR.service.Baseline.v1.0:type=operation,name=testStringableLists
 CoUGAR.service.Baseline.v1.0:type=operation,name=testLargePost
   ~Calls~275
   ...
-```
+`
 
 #### Return all properties of many beans
 
 As above, but don't specify an attribute ("an") parameter.
 
-* ```https://localhost:9999/administration/batchquery.jsp?on=CoUGAR.service.Baseline.v1.0:type=operation,name=**```
+* `https://localhost:9999/administration/batchquery.jsp?on=CoUGAR.service.Baseline.v1.0:type=operation,name=**`
 
 #### Run an mBean operation
 
 The operation must accept no parameters.
 
-* ```https://localhost:9999/administration/batchquery.jsp?on=CoUGAR:name=Logging&op=getNumErrors```
+* `https://localhost:9999/administration/batchquery.jsp?on=CoUGAR:name=Logging&op=getNumErrors`
 
 the Formatted return value is in the form (BeanName)(OperationName)(Result)
 
-```
+`
 CoUGAR:name=Logging~getNumErrors~0~
-```
+`
 
 # Adding your own beans
 
-You can add your own MBeans by using the ```javax.management``` API, either in Java code, or in Spring.  Here's an example in Spring using annotations.
+You can add your own MBeans by using the `javax.management` API, either in Java code, or in Spring.  Here's an example in Spring using annotations.
 
-```
+`
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -245,11 +245,11 @@ You can add your own MBeans by using the ```javax.management``` API, either in J
 	</property>
     </bean>
 </beans>
-```
+`
 
-Here's an example of what ```myBean``` could look like, using annotations.
+Here's an example of what `myBean` could look like, using annotations.
 
-```
+`
 import org.springframework.jmx.export.annotation.*;
 @ManagedResource(description="My Managed Bean")
 public class EchoBean {
@@ -273,20 +273,20 @@ public class EchoBean {
         //
     }
 }
-```
+`
 
 There are many possible ways of [adding MBeans in Spring](http://static.springsource.org/spring/docs/2.0.x/reference/jmx.html)
 or in [plain old Java](http://download.oracle.com/javase/6/docs/technotes/guides/jmx/index.html), this is just one of them
 exposed as an example.  The key thing is to use the platform MBean server.
 
-It's unwise to set ```autodetect``` to true, as this can expose some classes in other modules (Cougar core or otherwise)
+It's unwise to set `autodetect` to true, as this can expose some classes in other modules (Cougar core or otherwise)
 that weren't supposed to be.
 
 # Other
 
 ## Relevant source packages
 
-```
+`
 com.betfair.cougar.core.api.jmx
 com.betfair.cougar.core.impl.jmx
-```
+`

@@ -22,13 +22,13 @@ listens to the heap, and subsequently the client side heap listens to the client
 # Defining connected operations in BSIDL
 
 All data types defined in your BSIDL will have both normal and connected versions generated. To define a connected
-operation, just specify the ```connected``` attribute with a value of ```true```. Depending on whether you have selected
-```client``` or ```server``` binding generation, you will get either server or client side connected objects generated
+operation, just specify the `connected` attribute with a value of `true`. Depending on whether you have selected
+`client` or `server` binding generation, you will get either server or client side connected objects generated
 (or both), as well as a common parent class.
 
 For example (documentation elements removed for brevity):
 
-```
+`
 <operation name="bestPrices" connected="true">
   <parameters>
     <request>
@@ -47,7 +47,7 @@ For example (documentation elements removed for brevity):
   <parameter name="lay2" type="float"/>
   <parameter name="lay3" type="float"/>
 </dataType>
-```
+`
 
 {info}
 Whilst no extension elements exist for push, you do need to still ensure you have defined the operation in your extensions
@@ -59,15 +59,15 @@ in the service interface and definition.
 
 In total, for the above snippet you would end up with the following generated code:
 
-* Operation signature: ```public ConnectedResponse bestPrices(ExecutionContext ctx, String marketId);```
-* Abstract parent connected object: ```BestPricesCO```
-* Optional server connected object: ```BestPricesServerCO```
-* Optional client connected object: ```BestPricesClientCO```
+* Operation signature: `public ConnectedResponse bestPrices(ExecutionContext ctx, String marketId);`
+* Abstract parent connected object: `BestPricesCO`
+* Optional server connected object: `BestPricesServerCO`
+* Optional client connected object: `BestPricesClientCO`
 
 ## Constraints
 
 Due to the nature of push, there is one restriction with regards to connected operations, namely that you cannot have a
-response type of ```void```.
+response type of `void`.
 
 # Working with connected objects
 
