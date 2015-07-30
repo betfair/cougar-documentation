@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 # What is Cougar?
 
 This analysis from one of our developers seems to describe what Cougar is and isn't very well:

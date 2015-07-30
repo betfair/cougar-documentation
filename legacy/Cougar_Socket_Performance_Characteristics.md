@@ -3,8 +3,6 @@ layout: default
 ---
 # Socket Performance Testing
 
-{toc:minLevel=2}
-
 ## RPC
 
 ### Local loopback
@@ -1305,5 +1303,3 @@ Num updates for each heap for these tests was 100k.
 <td>.7685</td>
 </tr>
 </table>
-
-### LA

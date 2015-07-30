@@ -3,7 +3,6 @@ layout: default
 ---
 Debugging in Cougar
 ===================
-{:toc}
 
 # Launching the Application from the IDE
 

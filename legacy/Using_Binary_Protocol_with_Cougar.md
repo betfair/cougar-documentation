@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 This document describes basic configuration of binary protocol supported by Cougar.
 
 One of the main differences of binary protocol is that it is TCP\- rather than HTTP-based, hence it does

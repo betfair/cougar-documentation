@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 # Service Health Status Exposure
 
 ## Setting up Monitors

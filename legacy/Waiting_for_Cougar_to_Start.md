@@ -3,8 +3,6 @@ layout: default
 ---
 # CougarStartingGate and GateListeners
 
-{toc:minLevel=2}
-
 ## Overview
 
 Cougar is able to notify listeners that it has started up. This is useful for services or components which should not start to interact with external entities until Cougar is up and running.

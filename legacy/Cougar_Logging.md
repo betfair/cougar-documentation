@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 # What Cougar Logs and Where
 
 ## Effective Configuration Log

@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 # Unit Testing
 
 All your application code should live in the `application` submodule of your Cougar project, so your unit tests should go there too.

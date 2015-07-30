@@ -26,9 +26,7 @@ extensions for the operations you have defined, otherwise the `idd` build will f
 
 The path to access an operation is:
 
-`
-[<interfacePath>/][v<majorVersion>]/<operationPath>
-`
+    [<interfacePath>/][v<majorVersion>]/<operationPath>
 
 * The `interfacePath` is optional.  It defaults to your BSIDL interface name but can be changed.
 * The `majorVersion` is `x` in your service's `x.y[.z]` BSIDL-defined version number.  There is a way of
@@ -37,13 +35,11 @@ omitting it if necessary.
 
 # Document overview
 
-`
-<interface name="Baseline">
-    <!-- operation mappings -->
-    <!-- event mappings -->
-    <!-- interface extensions -->
-</interface>
-`
+    <interface name="Baseline">
+        <!-- operation mappings -->
+        <!-- event mappings -->
+        <!-- interface extensions -->
+    </interface>
 
 # Extensions
 
@@ -51,7 +47,6 @@ omitting it if necessary.
 
 Example:
 
-`
     <operation name="testSimpleGet">
         <parameters>
 	    <request>
@@ -67,7 +62,6 @@ Example:
             <method>GET</method>
 	</extensions>
     </operation>
-`
 
 The request parameter names and types must match those of the operation in the BSIDL document proper.
 
@@ -105,9 +99,7 @@ interface's own path, described in the 'interface extensions' section), and the 
 
 The path to access an operation is:
 
-`
-<interfacePath>/v<majorDotMinorVersion>/<operationPath>
-`
+    <interfacePath>/v<majorDotMinorVersion>/<operationPath>
 
 If omitted, the `operationPath` defaults to the name of the operation.
 
@@ -118,7 +110,6 @@ parameters cannot have a bindings style of `body`.
 
 Example:
 
-`
     <event name="TestSimpleGet" since="1.0">
         <description>An event to store a message to get</description>
         <parameter type="string" name="message" mandatory="true">
@@ -128,7 +119,6 @@ Example:
 	    </extensions>
         </parameter>
     </event>
-`
 
 The event parameter names and types must match those of the operation in the BSIDL document proper.
 
@@ -138,11 +128,9 @@ The `style` of each event parameter must be `body`.  Suppport for `header` `styl
 
 Example:
 
-`
     <extensions>
         <path>/demo</path>
     </extensions>
-`
 
 ### Path
 
@@ -150,9 +138,7 @@ The `path` extension of the interface partly contributes to how the service's op
 
 The path to access an operation is:
 
-`
-<interfacePath>/v<majorDotMinorVersion>/<operationPath>
-`
+    <interfacePath>/v<majorDotMinorVersion>/<operationPath>
 
 The `interfacePath` and the `version` can both be omitted (the former by using the `unversioned` attribute,
 and the latter by having an empty `interfacePath`).

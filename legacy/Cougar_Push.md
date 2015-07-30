@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 # Introduction to Push
 
 ![CougarCO](CougarCO.png)
@@ -28,31 +26,27 @@ operation, just specify the `connected` attribute with a value of `true`. Depend
 
 For example (documentation elements removed for brevity):
 
-`
-<operation name="bestPrices" connected="true">
-  <parameters>
-    <request>
-      <parameter name="marketId" type="string">
-      </parameter>
-    </request>
-    <simpleResponse type="BestPrices"/>
-  </parameters>
-</operation>
-.
-<dataType name="BestPrices">
-  <parameter name="back1" type="float"/>
-  <parameter name="back2" type="float"/>
-  <parameter name="back3" type="float"/>
-  <parameter name="lay1" type="float"/>
-  <parameter name="lay2" type="float"/>
-  <parameter name="lay3" type="float"/>
-</dataType>
-`
+    <operation name="bestPrices" connected="true">
+      <parameters>
+        <request>
+          <parameter name="marketId" type="string">
+          </parameter>
+        </request>
+        <simpleResponse type="BestPrices"/>
+      </parameters>
+    </operation>
+    ...
+    <dataType name="BestPrices">
+      <parameter name="back1" type="float"/>
+      <parameter name="back2" type="float"/>
+      <parameter name="back3" type="float"/>
+      <parameter name="lay1" type="float"/>
+      <parameter name="lay2" type="float"/>
+      <parameter name="lay3" type="float"/>
+    </dataType>
 
-{info}
-Whilst no extension elements exist for push, you do need to still ensure you have defined the operation in your extensions
-document. You do not, however, need to define any extension or parameter sub-elements.
-{info}
+*Whilst no extension elements exist for push, you do need to still ensure you have defined the operation in your extensions
+document. You do not, however, need to define any extension or parameter sub-elements.*
 
 This will then generate a connected operation (which has a return type of ConnectedResponse) rather than an RPC operation
 in the service interface and definition.

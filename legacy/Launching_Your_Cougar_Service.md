@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 # Launching from Maven
 
 `

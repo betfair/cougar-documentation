@@ -1,7 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
 # Cougar Client
 
 # Choosing between the sync and async client

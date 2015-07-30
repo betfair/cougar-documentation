@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 # Events and BSIDL
 
 Cougar includes support for Event emission/consumption based upon any JMS offering, Cougar offers an ActiveMQ specific
@@ -20,32 +18,28 @@ To emit an event, it must be described in both your BSIDL and extensions documen
 
 ### BSIDL Event definition
 
-`xml
-<event name="MatchedBet" since="2.0">
-    <description>An event to store matched bet events</description>
-    <parameter type="MatchedBetStruct" name="matchedBet" mandatory="true">
-        <description>details of the bet</description>
-    </parameter>
-    <parameter type="MarketStruct" name="market" mandatory="true">
-        <description>details of the market</description>
-    </parameter>
-</event>
-`
+    <event name="MatchedBet" since="2.0">
+        <description>An event to store matched bet events</description>
+        <parameter type="MatchedBetStruct" name="matchedBet" mandatory="true">
+            <description>details of the bet</description>
+        </parameter>
+        <parameter type="MarketStruct" name="market" mandatory="true">
+            <description>details of the market</description>
+        </parameter>
+    </event>
 
 Note that it is only necessary to describe the object you wish to be emitted onto the message bus.
 
 ### BSIDL Extensions document
 
-`xml
-<event name="MatchedBet">
-    <parameter name="matchedBet">
-        <extensions><style>body</style></extensions>
-    </parameter>
-    <parameter name="market">
-        <extensions><style>body</style></extensions>
-    </parameter>
-</event>
-`
+    <event name="MatchedBet">
+        <parameter name="matchedBet">
+            <extensions><style>body</style></extensions>
+        </parameter>
+        <parameter name="market">
+            <extensions><style>body</style></extensions>
+        </parameter>
+    </event>
 
 The only thing necessary is to describe the style of each parameter. Currently only body is supported, though if there
 is enough interest then JMS header parameters could be supported, as well as parameterized subscriptions. Both are
@@ -57,14 +51,12 @@ awaiting use-cases/requests.
 The pom of your launcher project needs the following Cougar dependency (note that you won't specifically need to reference
 any ActiveMQ jars; these dependencies are resolved by the activemq-transport project:
 
-`xml
-<dependency>
-  <groupId>com.betfair.cougar</groupId>
-  <artifactId>activemq-transport</artifactId>
-  <version>${cougar.version}</version>
-  <scope>runtime</scope>
-</dependency>
-`
+    <dependency>
+      <groupId>com.betfair.cougar</groupId>
+      <artifactId>activemq-transport</artifactId>
+      <version>${cougar.version}</version>
+      <scope>runtime</scope>
+    </dependency>
 
 ### Spring Wiring
 
@@ -76,22 +68,20 @@ In the spring wiring for your application, you'll need to configure two separate
 
 #### End point definition
 
-`xml
-<bean id="eventTransport" parent="com.betfair.cougar.transport.activemq.AbstractActiveMQTransport" init-method="init" destroy-method="destroy">
-    <property name="destinationUrl" value="$BASELINE{cougar.transport.activemq.url}"/>
-    <property name="destinationType" value="Topic"/>
-    <property name="username" value="$BASELINE{cougar.transport.activemq.username}"/>
-    <property name="password" value="$BASELINE{cougar.transport.activemq.password}"/>
-    <property name="destinationResolver">
-        <bean class="com.betfair.cougar.transport.jms.EventNameDestinationResolver">
-            <constructor-arg value="$BASELINE{activemq.destinationResolver.destinationBase}"/>
-        </bean>
-    </property>
-    <property name="threadPoolSize" value="$BASELINE{cougar.transport.activemq.eventThreadPool.size}"/>
-    <property name="transportIdentifier" value="myTransportIdentifier"/>
-    <property name="monitorRegistry" ref="cougar.core.MonitorRegistry"/>
-</bean>
-`
+    <bean id="eventTransport" parent="com.betfair.cougar.transport.activemq.AbstractActiveMQTransport" init-method="init" destroy-method="destroy">
+        <property name="destinationUrl" value="$BASELINE{cougar.transport.activemq.url}"/>
+        <property name="destinationType" value="Topic"/>
+        <property name="username" value="$BASELINE{cougar.transport.activemq.username}"/>
+        <property name="password" value="$BASELINE{cougar.transport.activemq.password}"/>
+        <property name="destinationResolver">
+            <bean class="com.betfair.cougar.transport.jms.EventNameDestinationResolver">
+                <constructor-arg value="$BASELINE{activemq.destinationResolver.destinationBase}"/>
+            </bean>
+        </property>
+        <property name="threadPoolSize" value="$BASELINE{cougar.transport.activemq.eventThreadPool.size}"/>
+        <property name="transportIdentifier" value="myTransportIdentifier"/>
+        <property name="monitorRegistry" ref="cougar.core.MonitorRegistry"/>
+    </bean>
 
 Examining each property in turn:
 
@@ -132,54 +122,50 @@ There are other properties you may wish to set, but which are optional:
 In your application's spring, you'll already have a ServiceRegistration bean defined, which introduces your service into
 the container. It will roughly look as follows:
 
-`
-<bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
-    <property name="resolver">
-        <bean class="com.betfair.baseline.v2.BaselineSyncServiceExecutableResolver">
-            <property name="service" ref="baselineAppService"/>
-        </bean>
-    </property>
-    <property name="serviceDefinition">
-        <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
-    </property>
-    <property name="service" ref="baselineAppService"/>
-    <property name="bindingDescriptors">
-        <util:set>
-            <bean class="com.betfair.baseline.v2.rescript.BaselineRescriptServiceBindingDescriptor"/>
-        </util:set>
-    </property>
-</bean>
-`
+    <bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
+        <property name="resolver">
+            <bean class="com.betfair.baseline.v2.BaselineSyncServiceExecutableResolver">
+                <property name="service" ref="baselineAppService"/>
+            </bean>
+        </property>
+        <property name="serviceDefinition">
+            <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
+        </property>
+        <property name="service" ref="baselineAppService"/>
+        <property name="bindingDescriptors">
+            <util:set>
+                <bean class="com.betfair.baseline.v2.rescript.BaselineRescriptServiceBindingDescriptor"/>
+            </util:set>
+        </property>
+    </bean>
 
 To this, you need to add your JMSServiceBindingDescriptor to the bindingDescriptor set, and set the eventExecutionContext property with an execution context, which will leave it looking as follows:
 
-`
-<bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
-    <property name="resolver">
-        <bean class="com.betfair.baseline.v2.BaselineSyncServiceExecutableResolver">
-            <property name="service" ref="baselineAppService"/>
-        </bean>
-    </property>
-    <property name="serviceDefinition">
-        <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
-    </property>
-    <property name="service" ref="baselineAppService"/>
-    <property name="eventTransports">
-        <util:set>
-            <ref bean="eventTransport"/>
-        </util:set>
-    </property>
-    <property name="bindingDescriptors">
-        <util:set>
-            <bean class="com.betfair.baseline.v2.rescript.BaselineRescriptServiceBindingDescriptor"/>
-            <bean class="com.betfair.baseline.v2.events.BaselineJMSServiceBindingDescriptor"/>
-        </util:set>
-    </property>
-    <property name="eventExecutionContext">
-        <bean class="com.betfair.cougar.api.ExecutionContextImpl"/>
-    </property>
-</bean>
-`
+    <bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
+        <property name="resolver">
+            <bean class="com.betfair.baseline.v2.BaselineSyncServiceExecutableResolver">
+                <property name="service" ref="baselineAppService"/>
+            </bean>
+        </property>
+        <property name="serviceDefinition">
+            <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
+        </property>
+        <property name="service" ref="baselineAppService"/>
+        <property name="eventTransports">
+            <util:set>
+                <ref bean="eventTransport"/>
+            </util:set>
+        </property>
+        <property name="bindingDescriptors">
+            <util:set>
+                <bean class="com.betfair.baseline.v2.rescript.BaselineRescriptServiceBindingDescriptor"/>
+                <bean class="com.betfair.baseline.v2.events.BaselineJMSServiceBindingDescriptor"/>
+            </util:set>
+        </property>
+        <property name="eventExecutionContext">
+            <bean class="com.betfair.cougar.api.ExecutionContextImpl"/>
+        </property>
+    </bean>
 
 Why does an execution context need to be defined for emitting events? This is the execution context that is used at the
 time you subscribe to events (we'll discuss why you need to subscribe to events when you're emitting them). If you have
@@ -193,22 +179,18 @@ subscribing to your application - and that your app appears as a source to your 
 
 The method to be implemented will look similar to the following:
 
-`
-public void subscribeToMatchedBet(ExecutionContext ctx, Object[] args, ExecutionObserver executionObserver);
-`
+    public void subscribeToMatchedBet(ExecutionContext ctx, Object[] args, ExecutionObserver executionObserver);
 
 Providing your wiring is correct, this subscribe method will be called when your Event Transport enabled application boots up.
 
 Hold onto the executionObserver handed to you by the execution venue. After app startup, you can emit an event by calling
 onResult on this executionObserver as follows:
 
-`
-try {
+    try {
         matchedBetObserver.onResult(new ExecutionResult(matchedBet));
     } catch (Throwable ex) {
     	LOGGER.log(Level.SEVERE, "An exception occurred emitting the matched bet event:", ex);
     }
-`
 
 ### Subscribing to Other Services' Events
 
@@ -219,60 +201,55 @@ depend on the activemq-transport library (see above).
 
 To the build section of your client application's pom, add the following plugin definition:
 
-`xml
-<plugins>
-	<plugin>
-		<groupId>com.betfair.plugins</groupId>
-		<artifactId>cougar-codegen-plugin</artifactId>
-		<version>${cougar.version}</version>
-		<executions>
-			<execution>
-				<goals>
-					<goal>process</goal>
-				</goals>
-			</execution>
-		</executions>
-		<configuration>
-			<services>
-				<service>
-					<serviceName>BaselineService</serviceName>
-				</service>
-			</services>
-			<iddAsResource>true</iddAsResource>
-			<client>true</client>
-		</configuration>
-    </plugin>
-</plugins>
-`
+    <plugins>
+        <plugin>
+            <groupId>com.betfair.plugins</groupId>
+            <artifactId>cougar-codegen-plugin</artifactId>
+            <version>${cougar.version}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>process</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <services>
+                    <service>
+                        <serviceName>BaselineService</serviceName>
+                    </service>
+                </services>
+                <iddAsResource>true</iddAsResource>
+                <client>true</client>
+            </configuration>
+        </plugin>
+    </plugins>
 
 You need to add the IDD as a project dependency:
-`
-            <dependency>
-                <!-- Use the maven coordinates of the emitting application's IDD project here -->
-                <groupId>com.betfair.cougar</groupId>
-                <artifactId>baseline-idd</artifactId>
-                <version>2.0-SNAPSHOT</version>
-            </dependency>
-`
+
+    <dependency>
+        <!-- Use the maven coordinates of the emitting application's IDD project here -->
+        <groupId>com.betfair.cougar</groupId>
+        <artifactId>baseline-idd</artifactId>
+        <version>2.0-SNAPSHOT</version>
+    </dependency>
 
 #### Spring configuration
 
 You will need two components - the endpoint definition (which is defined in the same fashion as the emitter, detailed
 above), and the wiring for your application.
 
-`xml
-<bean class="com.betfair.cougar.core.impl.ev.ClientServiceRegistration">
-    <property name="resolver">
-        <bean class="com.betfair.baseline.v2.BaselineClientExecutableResolver" init-method="init">
-            <property name="defaultOperationTransport" ref="rescriptTransport"/>
-            <property name="eventTransport" ref="eventTransport"/>
-        </bean>
-    </property>
-    <property name="serviceDefinition">
-        <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
-    </property>
-</bean>
-`
+    <bean class="com.betfair.cougar.core.impl.ev.ClientServiceRegistration">
+        <property name="resolver">
+            <bean class="com.betfair.baseline.v2.BaselineClientExecutableResolver" init-method="init">
+                <property name="defaultOperationTransport" ref="rescriptTransport"/>
+                <property name="eventTransport" ref="eventTransport"/>
+            </bean>
+        </property>
+        <property name="serviceDefinition">
+            <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
+        </property>
+    </bean>
 
 All class references in this bean definition will be generated for you by the IDLTODS plugin. Ensure that you configure
 in an appropriate `activemqTransport` into the eventTransport property of the resolver, and you're done.
@@ -283,9 +260,7 @@ Providing you've correctly configured the execution venue client (which should a
 application from the archetype - but if not, see [Invoking Remote Cougar Services with the Cougar Client](Invoking_Remote_Cougar_Services_with_the_Cougar_Client.html)
 , consuming events is straightforward. On your generated client call the appropriate subscribe method:
 
-`
-public void subscribeToMatchedBet (ExecutionContext ctx, Object[] args, ExecutionObserver observer);
-`
+    public void subscribeToMatchedBet (ExecutionContext ctx, Object[] args, ExecutionObserver observer);
 
 Note that the same method is exposed for both the Sync and aSync client.
 

@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-{:toc}
-
 ## Overview
 
 Cougar is a modular system, discovering modules at runtime based on predefined rules to search in your classpath.
