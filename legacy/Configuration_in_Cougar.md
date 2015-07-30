@@ -9,24 +9,22 @@ Spring configuration is found in the `src/main/resources/conf` directory of the 
 
 # Configuration Defaults and Overrides
 
-`
-application
-    src/main/resources
-	cougar-application.properties   <-- Optional properties file to set cougar property values
- 					    for your application at a level below overrides
-					    Will override service-defaults.properties but can still
-					    be overridden by overrides.properties
-					    Must have this exact name
-        conf
-            <spring config files>
-            service-defaults.properties <-- default properties (incl. overrides of other modules)
-                                            You can rename this file to anything you like, just
-                                            update the property placeholder in the spring config.
-launcher
-    src/main/resources
-        conf
-            overrides.properties        <-- overrides to Cougar, application and other modules
-`
+    application
+        src/main/resources
+        cougar-application.properties   <-- Optional properties file to set cougar property values
+                            for your application at a level below overrides
+                            Will override service-defaults.properties but can still
+                            be overridden by overrides.properties
+                            Must have this exact name
+            conf
+                <spring config files>
+                service-defaults.properties <-- default properties (incl. overrides of other modules)
+                                                You can rename this file to anything you like, just
+                                                update the property placeholder in the spring config.
+    launcher
+        src/main/resources
+            conf
+                overrides.properties        <-- overrides to Cougar, application and other modules
 
 Notes:
 
@@ -42,20 +40,16 @@ Within this file a `PropertyConfigurer` is defined that segregates and scopes yo
 a "property placeholder prefix", to avoid collisions with other modules' data.  The following definition is typical, and
 is what the Cougar archetype gives you by default.
 
-`
-<bean class="com.betfair.cougar.util.configuration.PropertyConfigurer">
-        <property name="defaultConfig" value="conf/<artifactId>-defaults.properties"/>
-	<property name="configOverride" value="overrides.properties"/>
-	<property name="placeholderPrefix" value="$MY_APPLICATION{"/>
+    <bean class="com.betfair.cougar.util.configuration.PropertyConfigurer">
+            <property name="defaultConfig" value="conf/<artifactId>-defaults.properties"/>
+        <property name="configOverride" value="overrides.properties"/>
+        <property name="placeholderPrefix" value="$MY_APPLICATION{"/>
     </bean>
-`
 
 Say you've defined the property `magic.number` in `<artifactId>-defaults.properties` and you want to use it in
 the assembly - you reference it like so:
 
-`
-<property name="magicNumber" value="$MY_APPLICATION{magic.number}"/>
-`
+    <property name="magicNumber" value="$MY_APPLICATION{magic.number}"/>
 
 If you want to reference another module's configuration data in your assembly, you need to know its property placeholder
 prefix.  If you depend on the module in your project, you can navigate to the depended-upon JAR and look inside it at
@@ -76,13 +70,11 @@ Cougar supports encrypted property values via implementations of the `StringEncr
 [Jasypt](http://www.jasypt.org). To register an implementation of this interface you must create a [bootstrap](Using_Modules_Libraries_in_Cougar.html)
 module, with the following bean definition:
 
-`
     <bean parent="cougar.core.EncryptorRegisterer" lazy-init="false">
         <constructor-arg>
             <bean class="com.betfair.MyStringEncyptor"/>
         </constructor-arg>
     </bean>
-`
 
 **Note**: Cougar only supports a single encryptor, so any attempt to set 2 will fail.
 

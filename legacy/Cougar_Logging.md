@@ -11,14 +11,12 @@ Location: Available on JMX console under MBean "name=ApplicationProperties" as i
 
 Contains a dump of all the properties Cougar has been configured to use (including those of your applications and modules).
 
-`
-...
-cougar.client.log.level=INFO
-cougar.client.log.request=true
-cougar.commandProcessor.corePoolSize=5
-cougar.commandProcessor.keepAliveTime=600
-...
-`
+    ...
+    cougar.client.log.level=INFO
+    cougar.client.log.request=true
+    cougar.commandProcessor.corePoolSize=5
+    cougar.commandProcessor.keepAliveTime=600
+    ...
 
 
 ## HTTP Endpoint Log
@@ -27,15 +25,12 @@ Location: Available on JMX console under MBean "name=EndPoints" as in [https://l
 
 Contains a dump of the endpoints available over the HTTP transport.
 
-`
-RESCRIPT : Health/v2.0/getDetailedHealthStatus => http://10.20.183.161:8080/healthcheck/v2/detailed
-RESCRIPT : Health/v2.0/isHealthy => http://10.20.183.161:8080/healthcheck/v2/summary
-...
-SOAP     : Health/v2.0/getDetailedHealthStatus => http://10.20.183.161:8080/HealthService/v2/
-SOAP     : Health/v2.0/isHealthy => http://10.20.183.161:8080/HealthService/v2/
-...
-`
-
+    RESCRIPT : Health/v2.0/getDetailedHealthStatus => http://10.20.183.161:8080/healthcheck/v2/detailed
+    RESCRIPT : Health/v2.0/isHealthy => http://10.20.183.161:8080/healthcheck/v2/summary
+    ...
+    SOAP     : Health/v2.0/getDetailedHealthStatus => http://10.20.183.161:8080/HealthService/v2/
+    SOAP     : Health/v2.0/isHealthy => http://10.20.183.161:8080/HealthService/v2/
+    ...
 
 ## Server Log
 
@@ -43,31 +38,25 @@ Location: `<cougar.log.dir>/<system.hostname>-server.log`.
 
 Contains Cougar framework logging (startup progress, property dump, Exceptions, shutdown info) and anything logged to a `CougarLogger`.
 
-{info}
-Note that CougarLoggingUtils uses the System Property "cougar.log.factory" to decide which LoggingFactory to use.
-{info}
+*Note that CougarLoggingUtils uses the System Property "cougar.log.factory" to decide which LoggingFactory to use.*
 
 Example:
 
-`
-package com.whatever;
-public class Thing {
-    final static CougarLogger logger = CougarLoggingUtils.getLogger(Thing.class);
-    public void logSomething(String what) {
-        logger.log(Level.INFO, "%s", what);
+    package com.whatever;
+    public class Thing {
+        final static CougarLogger logger = CougarLoggingUtils.getLogger(Thing.class);
+        public void logSomething(String what) {
+            logger.log(Level.INFO, "%s", what);
+        }
     }
-}
-`
 
 This will produce the following output in the server log (assuming you passed in "Hello, World\!"):
 
-`
-2011-06-23 13:14:42.130: com.whatever.Thing INFO - Hello, World!
-`
+    2011-06-23 13:14:42.130: com.whatever.Thing INFO - Hello, World!
 
 To configure the level of a specific category in configuration:
 
-`cougar.log.level.<logCategory>=<java.util.logging.Level>`
+    cougar.log.level.<logCategory>=<java.util.logging.Level>
 
 (you can specify this in your service defaults, in an overrides file, or as a system property)
 
@@ -78,9 +67,7 @@ Location:&nbsp;`<cougar.log.dir>/dw/<system.hostname>-access.log`.
 Cougar HTTP transport creates a comma-delimited entry in the access log at the point that the HTTP response is ready to
 be sent. An example for an access log entry is :
 
-`
-2012-07-17 09:37:30.949,localhost-07170935-000000004f,/api/v2/creditFunds/,gzip,10.2.5.172,10.2.5.172,--,Ok,81287000,329,13,json,json,[User-Agent=Cougar Client 2.4.0]
-`
+    2012-07-17 09:37:30.949,localhost-07170935-000000004f,/api/v2/creditFunds/,gzip,10.2.5.172,10.2.5.172,--,Ok,81287000,329,13,json,json,[User-Agent=Cougar Client 2.4.0]
 
 So the following are the fields (Refer&nbsp;com.betfair.cougar.transport.impl.protocol.http.HttpRequestLogger for the relevant Java code)
 # Received date-time, format yyyy-MM-dd HH:mm:ss.SSS
@@ -97,8 +84,6 @@ So the following are the fields (Refer&nbsp;com.betfair.cougar.transport.impl.pr
 # Request media sub-type
 # Response media sub-type
 # Extra fields (such as User-Agent) etc
-
-
 
 ## Operation Event Log (AKA 'request log')
 
@@ -123,19 +108,15 @@ array of Objects that will be output (comma-separated) to the event log after th
 # Register the `LogExtension` in your service interface implementation's `init` method.  At this time you have
 to specify how many fields your `LogExtension` will return.
 
-`
-@Override
+    @Override
     public void init(ContainerContext cc) {
         this.containerContext = cc;
         cc.registerExtensionLoggerClass(MyLogExtension.class, 1);
     }
-`
 
 # Whenever you want to use extension logging on the request, use the `setRequestLogExtension` method on the operation's `ExecutionContext`.
 
-`java
-ctx.setRequestLogExtension(new MyLogExtension(thing, otherThing));
-`
+    ctx.setRequestLogExtension(new MyLogExtension(thing, otherThing));
 
 ## Trace Logs
 
@@ -154,20 +135,16 @@ To hook a method (service interface operation or otherwise) up with KPI monitori
 * The object should be instantiated by Spring
 * Methods should use the `@KPITimedEvent` annotation
 
-`Java
-@Override
+    @Override
     @KPITimedEvent(value = "ExampleServiceImpl.getSimpleResponse", catchFailures = true)
 	public SimpleResponseObject getSimpleResponse(RequestContext ctx, String message) throws SimpleException {
             ...
-`
 
 Log entries will be made around every minute (give or take a few milliseconds).
 
 The log entry format is a JSON object, which can contain many methods' KPIs.  Each method's KPI entry is split into time ranges, or "buckets".  Here is an example of the `ExampleServiceImpl.getSimpleResponse` method returning without Exception 59 times, 58 of those times in under 0-25ms (the time range is known bucket) and 1 in the 250-500ms range.
 
-`
-2011-02-03 10:26:00.017: com.betfair.KPI INFO - \{"startTime":1296728700026,"endTime":1296728760016,"ExampleServiceImpl.getSimpleResponse.OK":\{"\[0-25.0\]":\{"avg":0.431,"ttl":25.0,"cnt":58.0,"min":0.0,"max":2.0,"dev":0.534\},"\[250.0-500.0\]":\{"avg":291.0,"ttl":291.0,"cnt":1.0,"min":291.0,"max":291.0,"dev":0.0\}\}\}
-`
+    2011-02-03 10:26:00.017: com.betfair.KPI INFO - \{"startTime":1296728700026,"endTime":1296728760016,"ExampleServiceImpl.getSimpleResponse.OK":\{"\[0-25.0\]":\{"avg":0.431,"ttl":25.0,"cnt":58.0,"min":0.0,"max":2.0,"dev":0.534\},"\[250.0-500.0\]":\{"avg":291.0,"ttl":291.0,"cnt":1.0,"min":291.0,"max":291.0,"dev":0.0\}\}\}
 
 The keys are broken down as follows:
 
@@ -184,9 +161,7 @@ The keys are broken down as follows:
 
 If `catchFailures` is true (the default is false), then the KPI log will distinguish between successful and failed (ie. exception thrown) invocations by using `<operationName>.OK` and `<operationName.Failed`.  Example:
 
-`
-2011-02-03 10:46:00.018: com.betfair.KPI INFO - \{"startTime":1296729900030,"endTime":1296729960017,"ExampleServiceImpl.getSimpleResponse.Failed":\{"\[0-25.0\]":\{"avg":0.071,"ttl":1.0,"cnt":14.0,"min":0.0,"max":1.0,"dev":0.267\}\},"ExampleServiceImpl.getSimpleResponse.OK":\{"\[0-25.0\]":\{"avg":1.167,"ttl":7.0,"cnt":6.0,"min":1.0,"max":2.0,"dev":0.408\}\}\}
-`
+    2011-02-03 10:46:00.018: com.betfair.KPI INFO - \{"startTime":1296729900030,"endTime":1296729960017,"ExampleServiceImpl.getSimpleResponse.Failed":\{"\[0-25.0\]":\{"avg":0.071,"ttl":1.0,"cnt":14.0,"min":0.0,"max":1.0,"dev":0.267\}\},"ExampleServiceImpl.getSimpleResponse.OK":\{"\[0-25.0\]":\{"avg":1.167,"ttl":7.0,"cnt":6.0,"min":1.0,"max":2.0,"dev":0.408\}\}\}
 
 Both checked (i.e. BSIDL-defined) and unchecked (runtime) Exceptions are classified as failures by the KPI framework by default.
 
@@ -198,21 +173,19 @@ You will want to define a custom event log if you require any log with a format 
 
 This is simplest to do using your module's Spring assembly file (`conf/cougar-application-spring.xml`).
 
-`xml
-<bean class="com.betfair.cougar.logging.EventLogDefinition" init-method="register">
-        <property name="logName" value="ADDITIONAL-LOG"/>
-	<property name="registry" ref="eventLoggingRegistry"/>
-	<property name="handler">
-	    <bean class="com.betfair.cougar.logging.handlers.TextEventLogHandler">
-                <constructor-arg value="$COUGAR{cougar.log.dir}/$COUGAR{system.hostname}-additional.log"/>
-                <constructor-arg value="$MY_APP{cougar.log.ADDITIONAL-LOG.flush}"/> <!-- true or false -->
-                <constructor-arg value="$MY_APP{cougar.log.ADDITIONAL-LOG.append}"/> <!-- true or false -->
-		<constructor-arg value="$MY_APP{cougar.log.ADDITIONAL-LOG.rotation}"/> <!-- HOUR usually -->
-		<constructor-arg value="false"/> <!-- this isn't an 'abstract' handler -->
-	    </bean>
-	</property>
+    <bean class="com.betfair.cougar.logging.EventLogDefinition" init-method="register">
+            <property name="logName" value="ADDITIONAL-LOG"/>
+        <property name="registry" ref="eventLoggingRegistry"/>
+        <property name="handler">
+            <bean class="com.betfair.cougar.logging.handlers.TextEventLogHandler">
+                    <constructor-arg value="$COUGAR{cougar.log.dir}/$COUGAR{system.hostname}-additional.log"/>
+                    <constructor-arg value="$MY_APP{cougar.log.ADDITIONAL-LOG.flush}"/> <!-- true or false -->
+                    <constructor-arg value="$MY_APP{cougar.log.ADDITIONAL-LOG.append}"/> <!-- true or false -->
+            <constructor-arg value="$MY_APP{cougar.log.ADDITIONAL-LOG.rotation}"/> <!-- HOUR usually -->
+            <constructor-arg value="false"/> <!-- this isn't an 'abstract' handler -->
+            </bean>
+        </property>
     </bean>
-`
 
 Notes:
 
@@ -228,9 +201,7 @@ subclass will do (including any you invent).
 # Implement a `com.betfair.cougar.api.LoggableEvent` (which also encapsulates the name of the log which the event will be recorded-to, e.g. `ADDITIONAL_LOG`)
 # Whenever you want to log a custom event, use the `addEventLogRecord` method on the operation's `RequestContext`
 
-`java
-ctx.addEventLogRecord(new MyLoggableEvent(thing, otherThing));
-`
+    ctx.addEventLogRecord(new MyLoggableEvent(thing, otherThing));
 
 ## Logging an event from an interceptor
 
@@ -252,7 +223,7 @@ The suffix used for rotating logs is `.YYYY-MM-DD-HH`.
 
 # Muffling Cougar logs from code
 
-`CougarLoggingUtils.suppressAllRootLoggerOutput();`
+    CougarLoggingUtils.suppressAllRootLoggerOutput();
 
 # Echoing of Cougar logs to stdout
 

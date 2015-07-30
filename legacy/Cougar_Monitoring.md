@@ -17,14 +17,12 @@ This should have been exemplified in the archetype you used as a basis for your 
 
 Your service's status information will then be available to you if you use the Cougar Health Service module (included by default in the archetype).
 
-`XML
     <dependency>
         <groupId>com.betfair.cougar</groupId>
         <artifactId>cougar-health-service-app</artifactId>
         <version>${cougar.version}</version>
         <scope>runtime</scope>
     </dependency>
-`
 
 ## Cougar Health Service URLs
 
@@ -65,11 +63,11 @@ The port is usually 9999 unless over-ridden by `jmx.html.port`.
 
 
 <table style='background-color: #FFFFCE;'>
-         <tr>
-           <td valign='top'><img src='warning.gif' width='16' height='16' align='absmiddle' alt='' border='0'></td>
-           <td><p>The protocol for the services on port 9999 is usually HTTP when the application is run up in dev mode (e.g. via `exec:java`), and HTTPS everywhere else.
-           In this document HTTP is used, simply replace with HTTPS where necessary.</p></td>
-          </tr>
+     <tr>
+       <td valign='top'><img src='warning.gif' width='16' height='16' align='absmiddle' alt='' border='0'></td>
+       <td><p>The protocol for the services on port 9999 is usually HTTP when the application is run up in dev mode (e.g. via `exec:java`), and HTTPS everywhere else.
+       In this document HTTP is used, simply replace with HTTPS where necessary.</p></td>
+      </tr>
 </table>
 
 
@@ -138,16 +136,14 @@ All the attributes of a bean are listed by not specifying an attribute ("an") pa
 
 The skeleton of the return value is shown below. It has been formatted for ease of reading.
 
-`
-java.lang:type=Runtime
-    ~Name~2344@HARRISP
-    ~ClassPath~...
-    ~VmName~Java HotSpot(TM) Server VM
-    ~VmVendor~Sun Microsystems Inc.
-    ~VmVersion~14.0-b16
-    ~BootClassPathSupported~true
-    ...
-`
+    java.lang:type=Runtime
+        ~Name~2344@HOSTNAME
+        ~ClassPath~...
+        ~VmName~Java HotSpot(TM) Server VM
+        ~VmVendor~Sun Microsystems Inc.
+        ~VmVersion~14.0-b16
+        ~BootClassPathSupported~true
+        ...
 
 #### Return the a single attribute of a bean and the current time
 
@@ -155,11 +151,9 @@ java.lang:type=Runtime
 
 The formatted return value is shown below.
 
-`
-Time~2009-10-29 14:51:28.932~
-java.lang:type=Runtime
-    ~VmVersion~14.0-b16
-`
+    Time~2009-10-29 14:51:28.932~
+    java.lang:type=Runtime
+        ~VmVersion~14.0-b16
 
 #### Return a System property
 
@@ -167,10 +161,8 @@ java.lang:type=Runtime
 
 The skeleton formatted return value is shown below.
 
-`
-System Properties
-    ~java.runtime.name~Java(TM) SE Runtime Environment
-`
+    System Properties
+        ~java.runtime.name~Java(TM) SE Runtime Environment
 
 #### Return the same property from many beans
 
@@ -178,17 +170,15 @@ System Properties
 
 The formatted return value is shown below.
 
-`
-CoUGAR.service.Baseline.v1.0:type=operation,name=testException
-  ~Calls~67
-|
-CoUGAR.service.Baseline.v1.0:type=operation,name=testStringableLists
-  ~Calls~0
-|
-CoUGAR.service.Baseline.v1.0:type=operation,name=testLargePost
-  ~Calls~275
-  ...
-`
+    CoUGAR.service.Baseline.v1.0:type=operation,name=testException
+      ~Calls~67
+    |
+    CoUGAR.service.Baseline.v1.0:type=operation,name=testStringableLists
+      ~Calls~0
+    |
+    CoUGAR.service.Baseline.v1.0:type=operation,name=testLargePost
+      ~Calls~275
+    ...
 
 #### Return all properties of many beans
 
@@ -204,76 +194,70 @@ The operation must accept no parameters.
 
 the Formatted return value is in the form (BeanName)(OperationName)(Result)
 
-`
-CoUGAR:name=Logging~getNumErrors~0~
-`
+    CoUGAR:name=Logging~getNumErrors~0~
 
 # Adding your own beans
 
 You can add your own MBeans by using the `javax.management` API, either in Java code, or in Spring.  Here's an example in Spring using annotations.
 
-`
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-    	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
-    <bean id="myBean" class="com.betfair.services.example.EchoBean"/>
-    <bean id="jmxAttributeSource"
-        class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
-    <bean class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
-	<property name="server">
-	    <bean class="org.springframework.jmx.support.MBeanServerFactoryBean">
-	        <property name="locateExistingServerIfPossible" value="true"/>
-	    </bean>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+        <bean id="myBean" class="com.betfair.services.example.EchoBean"/>
+        <bean id="jmxAttributeSource"
+            class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
+        <bean class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+        <property name="server">
+            <bean class="org.springframework.jmx.support.MBeanServerFactoryBean">
+                <property name="locateExistingServerIfPossible" value="true"/>
+            </bean>
+            </property>
+        <property name="assembler">
+                <bean class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+            <property name="attributeSource" ref="jmxAttributeSource" />
+            </bean>
+            </property>
+        <property name="namingStrategy">
+                <bean class="org.springframework.jmx.export.naming.KeyNamingStrategy"/>
+            </property>
+        <property name="autodetect" value="false" />
+        <property name="registrationBehaviorName" value="REGISTRATION_FAIL_ON_EXISTING"/>
+        <property name="beans">
+                <map>
+                    <entry key="Foo.Bar:wizz=bang" value-ref="myBean"/>
+                </map>
         </property>
-	<property name="assembler">
-            <bean class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
-		<property name="attributeSource" ref="jmxAttributeSource" />
-	    </bean>
-        </property>
-	<property name="namingStrategy">
-            <bean class="org.springframework.jmx.export.naming.KeyNamingStrategy"/>
-        </property>
-	<property name="autodetect" value="false" />
-	<property name="registrationBehaviorName" value="REGISTRATION_FAIL_ON_EXISTING"/>
-	<property name="beans">
-            <map>
-                <entry key="Foo.Bar:wizz=bang" value-ref="myBean"/>
-            </map>
-	</property>
-    </bean>
-</beans>
-`
+        </bean>
+    </beans>
 
 Here's an example of what `myBean` could look like, using annotations.
 
-`
-import org.springframework.jmx.export.annotation.*;
-@ManagedResource(description="My Managed Bean")
-public class EchoBean {
-    private String prefix;
-    @ManagedAttribute(description="Get the prefix")
-    public String getPrefix() {
-        return prefix;
+    import org.springframework.jmx.export.annotation.*;
+    @ManagedResource(description="My Managed Bean")
+    public class EchoBean {
+        private String prefix;
+        @ManagedAttribute(description="Get the prefix")
+        public String getPrefix() {
+            return prefix;
+        }
+        @ManagedAttribute(description="Set the prefix")
+        public void setPrefix(String prefix) {
+            this.prefix = prefix;
+        }
+        @ManagedOperation(description="Echoes the argument, prepending the prefix")
+        @ManagedOperationParameters({
+            @ManagedOperationParameter(name = "argument", description = "The argument")
+        })
+        public String echo(String arg) {
+            return prefix <u> ": " </u> arg;
+        }
+        public void dontExposeMe() {
+            //
+        }
     }
-    @ManagedAttribute(description="Set the prefix")
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-    @ManagedOperation(description="Echoes the argument, prepending the prefix")
-    @ManagedOperationParameters({
-        @ManagedOperationParameter(name = "argument", description = "The argument")
-    })
-    public String echo(String arg) {
-        return prefix <u> ": " </u> arg;
-    }
-    public void dontExposeMe() {
-        //
-    }
-}
-`
 
 There are many possible ways of [adding MBeans in Spring](http://static.springsource.org/spring/docs/2.0.x/reference/jmx.html)
 or in [plain old Java](http://download.oracle.com/javase/6/docs/technotes/guides/jmx/index.html), this is just one of them
@@ -286,7 +270,5 @@ that weren't supposed to be.
 
 ## Relevant source packages
 
-`
-com.betfair.cougar.core.api.jmx
-com.betfair.cougar.core.impl.jmx
-`
+    com.betfair.cougar.core.api.jmx
+    com.betfair.cougar.core.impl.jmx

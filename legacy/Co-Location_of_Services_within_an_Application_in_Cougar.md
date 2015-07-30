@@ -21,66 +21,60 @@ your ServiceRegistration bean, will expose the service with the supplied prefix.
 
 Consider the following set of Protocol Bindings:
 
-`xml
-<bean parent="cougar.transport.AbstractProtocolBinding">
-  <property name="contextRoot" value=""/>
-  <property name="identityTokenResolver" ref="SimpleRescriptIdentityTokenResolver"/>
-  <property name="protocol" value="RESCRIPT"/>
-</bean>
-<bean parent="cougar.transport.AbstractProtocolBinding">
-  <property name="contextRoot" value="www"/>
-  <property name="identityTokenResolver">
-    <bean class="com.betfair.cougar.baseline.security.AlternativeRescriptIdentityTokenResolver"/>
-  </property>
-  <property name="protocol" value="RESCRIPT"/>
-</bean>
-`
+    <bean parent="cougar.transport.AbstractProtocolBinding">
+      <property name="contextRoot" value=""/>
+      <property name="identityTokenResolver" ref="SimpleRescriptIdentityTokenResolver"/>
+      <property name="protocol" value="RESCRIPT"/>
+    </bean>
+    <bean parent="cougar.transport.AbstractProtocolBinding">
+      <property name="contextRoot" value="www"/>
+      <property name="identityTokenResolver">
+        <bean class="com.betfair.cougar.baseline.security.AlternativeRescriptIdentityTokenResolver"/>
+      </property>
+      <property name="protocol" value="RESCRIPT"/>
+    </bean>
 
 Against the following service definitions:
 
-`xml
-<bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
-    <property name="resolver">
-        <bean class="com.betfair.baseline.v2.BaselineSyncServiceExecutableResolver">
-            <property name="service" ref="baselineAppService"/>
-        </bean>
-    </property>
-    <property name="serviceDefinition">
-        <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
-    </property>
-    <property name="service" ref="baselineAppService"/>
-    <property name="bindingDescriptors">
-        <util:set>
-            <bean class="com.betfair.baseline.v2.rescript.BaselineRescriptServiceBindingDescriptor"/>
-        </util:set>
-    </property>
-</bean>
-<bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
-    <property name="resolver">
-        <bean class="com.betfair.baseline.v1.AnotherSyncServiceExecutableResolver">
-            <property name="service" ref="anotherService
-        </bean>
-    </property>
-    <property name="serviceDefinition">
-        <bean class="com.betfair.baseline.v1.AnotherServiceDefinition"/>
-    </property>
-    <property name="service" ref="anotherVersion"/>
-    <property name="bindingDescriptors">
-        <util:set>
-            <bean class="com.betfair.another.v1.rescript.AnotherRescriptServiceBindingDescriptor"/>
-        </util:set>
-    </property>
-</bean>
-`
+    <bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
+        <property name="resolver">
+            <bean class="com.betfair.baseline.v2.BaselineSyncServiceExecutableResolver">
+                <property name="service" ref="baselineAppService"/>
+            </bean>
+        </property>
+        <property name="serviceDefinition">
+            <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
+        </property>
+        <property name="service" ref="baselineAppService"/>
+        <property name="bindingDescriptors">
+            <util:set>
+                <bean class="com.betfair.baseline.v2.rescript.BaselineRescriptServiceBindingDescriptor"/>
+            </util:set>
+        </property>
+    </bean>
+    <bean class="com.betfair.cougar.core.impl.ev.ServiceRegistration">
+        <property name="resolver">
+            <bean class="com.betfair.baseline.v1.AnotherSyncServiceExecutableResolver">
+                <property name="service" ref="anotherService
+            </bean>
+        </property>
+        <property name="serviceDefinition">
+            <bean class="com.betfair.baseline.v1.AnotherServiceDefinition"/>
+        </property>
+        <property name="service" ref="anotherVersion"/>
+        <property name="bindingDescriptors">
+            <util:set>
+                <bean class="com.betfair.another.v1.rescript.AnotherRescriptServiceBindingDescriptor"/>
+            </util:set>
+        </property>
+    </bean>
 
 Will mean that each service will be exposed on both /www and / . So when you start Cougar up, you'll see the following endpoints:
 
-`
-/www/cougarBaseline/v2
-/cougarBaseline/v2
-/www/anotherService/v1
-/anotherService/v1
-`
+    /www/cougarBaseline/v2
+    /cougarBaseline/v2
+    /www/anotherService/v1
+    /anotherService/v1
 
 ### Running multiple versions of the same service simultaneously
 
@@ -100,35 +94,33 @@ disambiguate them.
 
 The following snippet shows the spring definition for defining and registering a namespaced client:
 
-`xml
-<bean name="syncClient" class="com.betfair.baseline.v2.BaselineSyncClientAdapter">
-    <property name="asynchronousClient">
-        <bean class="com.betfair.baseline.v2.BaselineClientImpl" parent="cougar.client.AbstractClient">
-            <constructor-arg value="CLI"/>
-        </bean>
-    </property>
-</bean>
-<bean class="com.betfair.cougar.core.impl.ev.ClientServiceRegistration">
-    <property name="resolver">
-        <bean class="com.betfair.baseline.v2.BaselineClientExecutableResolver" init-method="init">
-            <property name="defaultOperationTransport">
-                <bean parent="cougar.client.AbstractRescriptTransport">
-                    <constructor-arg>
-                        <bean class="com.betfair.baseline.v2.rescript.BaselineRescriptServiceBindingDescriptor"/>
-                    </constructor-arg>
-                    <property name="remoteAddress" value="$BASELINE{cougar.client.rescript.remoteaddress}"/>
-                    <property name="exceptionFactory">
-                        <bean class="com.betfair.baseline.v2.exception.BaselineExceptionFactory"/>
-                    </property>
-                </bean>
-            </property>
-        </bean>
-    </property>
-    <property name="serviceDefinition">
-        <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
-    </property>
-    <property name="namespace" value="CLI"/>
-</bean>
-`
+    <bean name="syncClient" class="com.betfair.baseline.v2.BaselineSyncClientAdapter">
+        <property name="asynchronousClient">
+            <bean class="com.betfair.baseline.v2.BaselineClientImpl" parent="cougar.client.AbstractClient">
+                <constructor-arg value="CLI"/>
+            </bean>
+        </property>
+    </bean>
+    <bean class="com.betfair.cougar.core.impl.ev.ClientServiceRegistration">
+        <property name="resolver">
+            <bean class="com.betfair.baseline.v2.BaselineClientExecutableResolver" init-method="init">
+                <property name="defaultOperationTransport">
+                    <bean parent="cougar.client.AbstractRescriptTransport">
+                        <constructor-arg>
+                            <bean class="com.betfair.baseline.v2.rescript.BaselineRescriptServiceBindingDescriptor"/>
+                        </constructor-arg>
+                        <property name="remoteAddress" value="$BASELINE{cougar.client.rescript.remoteaddress}"/>
+                        <property name="exceptionFactory">
+                            <bean class="com.betfair.baseline.v2.exception.BaselineExceptionFactory"/>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+        <property name="serviceDefinition">
+            <bean class="com.betfair.baseline.v2.BaselineServiceDefinition"/>
+        </property>
+        <property name="namespace" value="CLI"/>
+    </bean>
 
 Note that both the client bean and the registration of that service both need to specify (the same) namespace.
