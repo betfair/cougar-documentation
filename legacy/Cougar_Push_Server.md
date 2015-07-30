@@ -48,11 +48,9 @@ or for a map:
 </table>
 
 
-{info}
-All mutations of a heap must be done within transactional boundaries - indicated by calls to `beginUpdate()` and
+*All mutations of a heap must be done within transactional boundaries - indicated by calls to `beginUpdate()` and
 `endUpdate()` on the Heap instance. Failure to do so will result in an `IllegalStateException` being thrown. We
-strongly recommend you wrap this transactional code in a `try...finally...` block.
-{info}
+strongly recommend you wrap this transactional code in a `try...finally...` block.*
 
 Next we need to return this heap back to the client, by returning an instance of ConnectedResponse (we'll cover the
 subscription in more detail later):
