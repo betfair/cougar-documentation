@@ -185,12 +185,10 @@ You can return a BSIDL base type by declaring the response to be simple:
 
 An operation can return `void` like so:
 
-`
     ...
     <simpleResponse type="void">
         <description>No response</description>
     </simpleResponse>
-`
 
 ## Events
 

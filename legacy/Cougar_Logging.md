@@ -213,7 +213,7 @@ The suffix used for rotating logs is `.YYYY-MM-DD-HH`.
 
 # Changing log levels at runtime using JMX
 
-# Go to Cougar's logging control bean at `http{`}`[s]``://localhost:9999/ViewObjectRes/CoUGAR%3Aname%3DLoggingControl`
+# Go to Cougar's logging control bean at `https://localhost:9999/ViewObjectRes/CoUGAR%3Aname%3DLoggingControl`
 # Fill out setLogLevel operation parameters
 ## p1 \-> The name of the package or fully qualified class to start logging
 ## p2 \-> a [JULI log level](http://tomcat.apache.org/tomcat-6.0-doc/logging.html), e.g. `WARNING` or `FINEST`
