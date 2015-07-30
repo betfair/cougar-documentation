@@ -13,10 +13,8 @@ To customize the location of the static HTML directory:
 * Create the ‘info’ directory under some appropriate JAR’s `src/main/resources` dir
 * Add the following properties to your app
 
-`
-cougar.htmlHandler.contextPath=/info
-cougar.htmlHandler.regex=/info/.*
-`
+    cougar.htmlHandler.contextPath=/info
+    cougar.htmlHandler.regex=/info/.*
 
 I think the regex controls what resources the client of the embedded web server is allowed to access directly.
 

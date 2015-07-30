@@ -12,18 +12,12 @@ The notification happens once Cougar receives a Spring `onApplicationEvent()` ev
 The requirements are simply:
 
 1. a component needs to be notified when Cougar has started up (typically it shouldn't "start" until Cougar has started)
-
 2. a component may need to be notified only _after_ other components are notified (ie. it should be possible to specify dependencies)
-
 3. it is desirable to be able to invoke an arbitrary method on a  POJO instead of the POJO having to implement a listener interface. (viz. Spring's `depends-on` bean attribute).
 
-{info}
-The most notable components using this mechanism are `SpringAwareCacheFactory` and dependent beans like `TangosolLeaderElector` and `DeltaCacheManager`. These are not started as part of Spring context initialisation because of Coherence oddities. If we solved the Coherence problem these components could be started up inline, but the functionality remains useful.
-{info}
+*The most notable components using this mechanism are `SpringAwareCacheFactory` and dependent beans like `TangosolLeaderElector` and `DeltaCacheManager`. These are not started as part of Spring context initialisation because of Coherence oddities. If we solved the Coherence problem these components could be started up inline, but the functionality remains useful.*
 
-{info}
-It is worth drawing a distinction between "initialising" and "starting" components. Spring describes the `init-method` functionality as a way of doing a bit of work to set up the bean's state, after all properties have been set by Spring. You could see this as being different to how we often use the functionality to "start" a component (particularly components which fire off their own threads, or start interacting with external components).
-{info}
+*It is worth drawing a distinction between "initialising" and "starting" components. Spring describes the `init-method` functionality as a way of doing a bit of work to set up the bean's state, after all properties have been set by Spring. You could see this as being different to how we often use the functionality to "start" a component (particularly components which fire off their own threads, or start interacting with external components).*
 
 ## The easy way to register a listener
 
@@ -31,62 +25,53 @@ You should include a maven dependency on `cougar-core-impl` (no, that's not idea
 
 Say you have a bean named "myBean" with a method "startMe" that should be invoked after Cougar has started up. The wiring would be:
 
-`xml
-<bean parent="cougar.core.GateRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener">
-            <property name="bean" ref="myBean"/>
-            <property name="method" value="startMe"/>
-        </bean>
-    </constructor-arg>
-</bean>
-`
+    <bean parent="cougar.core.GateRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener">
+                <property name="bean" ref="myBean"/>
+                <property name="method" value="startMe"/>
+            </bean>
+        </constructor-arg>
+    </bean>
 
 Note that the above bean is anonymous (and that the parent bean is a prototype).
 
 If you use Spring's [p-namespace](http://static.springsource.org/spring/docs/2.5.x/reference/beans.html#xml-config-shortcuts) (section 3.3.2.6.2 of the manual), this simplifies to:
 
-`xml
-<bean parent="cougar.core.GateRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener" p:bean-ref="myBean" p:method="startMe"/>
-    </constructor-arg>
-</bean>
-`
+    <bean parent="cougar.core.GateRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener" p:bean-ref="myBean" p:method="startMe"/>
+        </constructor-arg>
+    </bean>
 
 If you wanted to register another bean which should only be started after `myBean`, you would use a `depends-on` tag, with the two declarations being:
 
-`xml
-<bean id="myBeanRegisterer" parent="cougar.core.GateRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener" p:bean-ref="myBean" p:method="startMe"/>
-    </constructor-arg>
-</bean>
-...
-<bean parent="cougar.core.GateRegisterer" depends-on="myBeanRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener" p:bean-ref="yetAnotherBean" p:method="anInitMethod"/>
-    </constructor-arg>
-</bean>
-`
+    <bean id="myBeanRegisterer" parent="cougar.core.GateRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener" p:bean-ref="myBean" p:method="startMe"/>
+        </constructor-arg>
+    </bean>
+    ...
+    <bean parent="cougar.core.GateRegisterer" depends-on="myBeanRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener" p:bean-ref="yetAnotherBean" p:method="anInitMethod"/>
+        </constructor-arg>
+    </bean>
 
-Notes:
-{info:icon=false}
+*Notes:
 1. yes, GateRegisterer is not a pretty name. Suggestions for improvements welcome.
 2. GateRegisterer can take a list of Listeners.
-{info}
+*
 
 ## Priorities
 
 GateRegisterer can have a priority, e.g.:
 
-`
-<bean parent="cougar.core.GateRegisterer" depends-on="myBeanRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener" p:bean-ref="yetAnotherBean" p:method="anInitMethod" p:priority="1000"/>
-    </constructor-arg>
-</bean>
-`
+    <bean parent="cougar.core.GateRegisterer" depends-on="myBeanRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener" p:bean-ref="yetAnotherBean" p:method="anInitMethod" p:priority="1000"/>
+        </constructor-arg>
+    </bean>
 
 The higher the number, the higher priority (i.e. how soon after Cougar core startup will the method execute).
 
@@ -104,11 +89,9 @@ You could declare your own `GateListener` and `GateRegisterer` beans from scratc
 
 The `GateRegisterer` (`com.betfair.cougar.core.api.GateRegisterer`) simply has a constructor with signature
 
-`java
-public GateRegisterer(CougarStartingGate gate, GateListener... listeners) {
-    // validate and register listeners with gate
-}
-`
+    public GateRegisterer(CougarStartingGate gate, GateListener... listeners) {
+        // validate and register listeners with gate
+    }
 
 The class is stateless.
 

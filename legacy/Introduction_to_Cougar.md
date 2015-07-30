@@ -53,7 +53,7 @@ Cougar currently supports SOAP and RESCRIPT protocols over the HTTP transport, a
 ### SOAP
 
 Simple Object Access Protocol ([SOAP](http://en.wikipedia.org/wiki/SOAP)) is a widely-used public XML based web services
-standard, overseen by the W3C. [We don't like it much](Whats_wrong_with_SOAP.html).
+standard, overseen by the W3C. We don't like it much.
 
 ### RESCRIPT
 

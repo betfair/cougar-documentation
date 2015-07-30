@@ -3,10 +3,8 @@ layout: default
 ---
 # Launching from Maven
 
-`
-[launcher]
-mvn -P run initialize
-`
+    [launcher]
+    mvn -P run initialize
 
 # Launching from the IDE
 
@@ -21,7 +19,6 @@ Create a debug profile in your IDE with the following characteristics:
 
 There is a bug in Eclipse Maven plugin that needs to be fixed by adding following code to your top level pom (by default Eclipse plugin doesn’t add AspectJ artefacts):
 
-`
     <build>
         <pluginManagement>
           <plugins>
@@ -34,7 +31,6 @@ There is a bug in Eclipse Maven plugin that needs to be fixed by adding followin
           </plugins>
         </pluginManagement>
     </build>
-`
 
 Now run `mvn eclipse:eclipse` from the top level project, then import as existing project into Eclipse.  If you get annoying errors saying 'The project cannot be built until the build path errors are resolved', [follow these instructions](http://www.scottdstrader.com/blog/ether_archives/000921.html) to resolve.
 

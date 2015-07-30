@@ -32,50 +32,42 @@ You should include a maven dependency on `cougar-core-impl` (no, that's not idea
 
 Say you have a bean named "myBean" with a method "startMe" that should be invoked after Cougar has started up. The wiring would be:
 
-`
-<bean parent="cougar.core.GateRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener">
-            <property name="bean" ref="myBean"/>
-            <property name="method" value="startMe"/>
-        </bean>
-    </constructor-arg>
-</bean>
-`
+    <bean parent="cougar.core.GateRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener">
+                <property name="bean" ref="myBean"/>
+                <property name="method" value="startMe"/>
+            </bean>
+        </constructor-arg>
+    </bean>
 
 Note that the above bean is anonymous (and that the parent bean is a prototype).
 
 If you use Spring's [p-namespace](http://static.springsource.org/spring/docs/2.5.x/reference/beans.html#xml-config-shortcuts) (section 3.3.2.6.2 of the manual), this simplifies to:
 
-`
-<bean parent="cougar.core.GateRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener" p:bean-ref="myBean" p:method="startMe"/>
-    </constructor-arg>
-</bean>
-`
+    <bean parent="cougar.core.GateRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener" p:bean-ref="myBean" p:method="startMe"/>
+        </constructor-arg>
+    </bean>
 
 If you wanted to register another bean which should only be started after `myBean`, you would use a `depends-on` tag, with the two declarations being:
 
-`
-<bean id="myBeanRegisterer" parent="cougar.core.GateRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener" p:bean-ref="myBean" p:method="startMe"/>
-    </constructor-arg>
-</bean>
-...
-<bean parent="cougar.core.GateRegisterer" depends-on="myBeanRegisterer">
-    <constructor-arg>
-        <bean parent="cougar.core.GateListener" p:bean-ref="yetAnotherBean" p:method="anInitMethod"/>
-    </constructor-arg>
-</bean>
-`
+    <bean id="myBeanRegisterer" parent="cougar.core.GateRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener" p:bean-ref="myBean" p:method="startMe"/>
+        </constructor-arg>
+    </bean>
+    ...
+    <bean parent="cougar.core.GateRegisterer" depends-on="myBeanRegisterer">
+        <constructor-arg>
+            <bean parent="cougar.core.GateListener" p:bean-ref="yetAnotherBean" p:method="anInitMethod"/>
+        </constructor-arg>
+    </bean>
 
-Notes:
-{info:icon=false}
+*Notes:
 1. yes, GateRegisterer is not a pretty name. Suggestions for improvements welcome.
-2. GateRegisterer can take a list of Listeners.
-{info}
+2. GateRegisterer can take a list of Listeners.*
 
 ## Gory details
 
@@ -94,11 +86,10 @@ defined in config file `conf/cougar-core-spring.xml` in project `cougar-core-imp
 
 The `GateRegisterer` (`com.betfair.cougar.core.api.GateRegisterer`) simply has a constructor with signature
 
-`
-public GateRegisterer(CougarStartingGate gate, GateListener... listeners) {
-    // validate and register listeners with gate
-}
-`
+    public GateRegisterer(CougarStartingGate gate, GateListener... listeners) {
+        // validate and register listeners with gate
+    }
+    
 The class is stateless.
 
 The `GateListenerAdapter` is a convenience implementation of `GateListener`, intended to mimic and provide the

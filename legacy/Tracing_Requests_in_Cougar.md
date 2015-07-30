@@ -8,12 +8,10 @@ and to a specific file) by adding trace lines:
 
 Example:
 
-`
-public class ExampleServiceImpl implements ExampleService {
-    public SimpleResponseObject getSimpleResponse(RequestContext ctx, String message) throws SimpleException {
-        ctx.trace("Starting getSimpleResponse for %s", message);
-        ...
-`
+    public class ExampleServiceImpl implements ExampleService {
+        public SimpleResponseObject getSimpleResponse(RequestContext ctx, String message) throws SimpleException {
+            ctx.trace("Starting getSimpleResponse for %s", message);
+            ...
 
 To enable tracing, you must associate the HTTP header `X-Trace-Me` on your RESCRIPT or SOAP request (any value will
 trigger tracing), or if you are using the Cougar client, have the `ExecutionContext` implementation you pass into the
